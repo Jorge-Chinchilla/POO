@@ -200,7 +200,6 @@ public class Controlador {
 	public Despacho crearDespacho(@RequestParam(name="idPedido") int idPedido,
 								  	 @RequestParam(name="estado") boolean estado) {
 		Pedido pedido = this.servicePedido.buscarPedido(idPedido);
-		boolean aprobado = true;
 		Despacho despacho = new Despacho(pedido, estado);
 		this.serviceDespacho.crearDespacho(despacho);
 		return despacho;
