@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.unah.poo.model.Cliente;
+import edu.unah.poo.model.Direccion;
 import edu.unah.poo.repository.RepositoryCliente;
+import edu.unah.poo.repository.RepositoryDireccion;
 
 @Service
 public class ServiceCliente {
@@ -14,8 +16,16 @@ public class ServiceCliente {
 	@Autowired
 	RepositoryCliente repositoryCliente;
 	
-	public void crearCliente(Cliente cliente) {
+	@Autowired
+	RepositoryDireccion repositoryDireccion;
+	
+	public void crearCliente(int idCliente, String nombre, String email, String telefono,
+							 double credito, int idDireccion, String tipo, String direccion) {
+		Cliente cliente = new Cliente(idCliente, nombre, email, telefono, credito);
 		this.repositoryCliente.save(cliente);
+		Direccion tmpDireccion = new Direccion(idDireccion, tipo, direccion, cliente);
+		this.repositoryDireccion.save(tmpDireccion);
+		
 	}
 	
 	public Cliente buscarCliente(int id) {
@@ -24,7 +34,5 @@ public class ServiceCliente {
 	
 	public List<Cliente> obtenerClientes(){
 		return this.repositoryCliente.findAll();
-	}
-	
-	
+	} 
 }

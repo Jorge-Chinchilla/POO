@@ -2,7 +2,7 @@ drop database sistemadeventas;
 create database sistemadeventas;
 
 use sistemadeventas;
-
+ -- usuario ,rol, activo
 create table cliente(idCliente int primary key,
                      nombre varchar(64),
 					 email varchar(64),
@@ -90,6 +90,8 @@ use sistemadeventas;
 select * from direccion;
 select * from pagoTarjeta;
 select* from pago;
+select * from cliente;
+select * from direccion;
 
 insert cliente values(100, "Jorge Chinchilla", "jorgech@gmail.com", "3798888", 2059.5);
 insert direccion values(200, "hogar","La guadalupe",100);

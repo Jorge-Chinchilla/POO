@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="ISO-8859-1" content="text/html; charset=UTF-8">
+<title>Registrar Cliente</title>
+
+<!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <img th:src="@{/images/sdv1.png}" width="70" height="70">
+    <a class="navbar-brand" href="#"></a>
+  <a class="navbar-brand" th:href="@{/sistema_de_ventas}">Sistema de ventas</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/sistema/principal}">Inicio<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" th:href="@{/sistema/registrar}">Registrar nuevo Cliente</a>
+          <a class="dropdown-item" href="#">Buscar Cliente</a>
+          <a class="dropdown-item" href="#">Listar Clientes</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Direcciones</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Añadir direccion</a>
+          <a class="dropdown-item" href="#">Direcciones cliente</a>
+          <a class="dropdown-item" href="#">Actualizar dirección de cliente</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pedido</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Crear pedido</a>
+          <a class="dropdown-item" href="#">Ver pedidos de cliente</a>
+          <a class="dropdown-item" href="#">...</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Salir</button>
+    </form>
+  </div>
+</nav>
+
+<main role="main">
+
+	<div class="jumbotron">
+    <div class="container">
+    <h1 class="display-3"></h1>
+      <h1 class="display-3"> </h1>
+      <h1 class="display-3"> </h1>
+      <h1 class="display-3">Registrar nuevo cliente</h1>
+      <p>Al ingresar un cliente, este se guardara automaticamente en la base de datos.</p>
+    </div>
+  	</div>
+		
+		<hr>
+		<div class="container">
+
+			<div class="card">
+				<h4 class="card-header">
+					<strong>Registro de cliente</strong>
+				</h4>
+				<div class="card-body">
+					<form th:action="@{/cliente/crearCliente}" method="post">
+						<div class="form-group">
+							<label for="exampleInputEmail1">IdCliente</label> <input
+								type="number" class="form-control" id="id" name="idCliente"
+								placeholder="ingrese un id para el cliente" min="0" max="999">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Nombre</label> <input type="text"
+								class="form-control" id="nombre" name="nombre"
+								placeholder="ingrese el nombre del cliente">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Email</label> <input
+								type="text" class="form-control" id="email" name="email"
+								placeholder="ingrese el correo del cliente">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Telefono</label> <input
+								type="text" class="form-control" id="telefono" name="telefono"
+								placeholder="ingrese el telefono del cliente">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Credito</label> <input
+								type="number" class="form-control" id="credito" name="credito"
+								placeholder="ingrese un id para el cliente" min="1000" max="3500">
+						</div>						
+						<div class="form-group">
+						<h4>Ingrese una direccion para el cliente</h4>
+							<label for="exampleInputEmail1">IdDireccion</label> <input
+								type="number" class="form-control" id="idDireccion" name="idDireccion"
+								placeholder="ingrese un id para la direccion" min="1000" max="2999">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Tipo</label> <input
+								type="text" class="form-control" id="tipo" name="tipo"
+								placeholder="ingrese el tipo de direccion">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">Direccion</label> <input
+								type="text" class="form-control" id="direccion" name="direccion"
+								placeholder="ingrese la direccion del cliente">
+						</div>
+						<button type="submit" class="btn btn-primary">Registrar</button>
+				</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</main>
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</body>
+</html>

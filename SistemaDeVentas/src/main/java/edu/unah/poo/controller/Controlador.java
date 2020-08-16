@@ -88,7 +88,7 @@ public class Controlador {
 			                    @RequestParam(name = "credito") double credito) {
 		 
 		Cliente tmpCliente = new Cliente(idCliente,nombre,email,telefono, credito);
-		this.serviceCliente.crearCliente(tmpCliente);
+		//this.serviceCliente.crearCliente(tmpCliente);
 		return tmpCliente;
 	}
 	
