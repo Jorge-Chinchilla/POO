@@ -16,6 +16,7 @@ import edu.unah.poo.model.Despacho;
 import edu.unah.poo.model.Direccion;
 import edu.unah.poo.model.Empleado;
 import edu.unah.poo.model.ListaPedido;
+import edu.unah.poo.model.Orden;
 import edu.unah.poo.model.Pago;
 import edu.unah.poo.model.PagoEfectivo;
 import edu.unah.poo.model.PagoTarjeta;
@@ -27,6 +28,7 @@ import edu.unah.poo.service.ServiceDespacho;
 import edu.unah.poo.service.ServiceDireccion;
 import edu.unah.poo.service.ServiceEmpleado;
 import edu.unah.poo.service.ServiceListaPedido;
+import edu.unah.poo.service.ServiceOrden;
 import edu.unah.poo.service.ServicePago;
 import edu.unah.poo.service.ServicePagoEfectivo;
 import edu.unah.poo.service.ServicePagoTarjeta;
@@ -69,6 +71,9 @@ public class Controlador {
 	
 	@Autowired
 	ServicePago servicePago;
+	
+	@Autowired
+	ServiceOrden serviceOrden;
 	
 	// /cliente/crearCliente?idCliente=100&nombre=Jorge Alberto Chinchilla Cruz&email=jorgech@gmail.com&telefono=33798888&credito=2095
 	
@@ -272,8 +277,8 @@ public class Controlador {
 	public Pago crearPago(@RequestParam(name="idPago") int idPago,
 								  @RequestParam(name="valorPedido") double valorPedido,
 								  @RequestParam(name="valorEnvio") double valorEnvio,
-								  @RequestParam(name="idEfectivo") int idEfectivo,
-								  @RequestParam(name="idTarjeta") int idTarjeta) {
+								  @RequestParam(name="idEfectivo", required = false) int idEfectivo,
+								  @RequestParam(name="idTarjeta", required = false) int idTarjeta) {
 		PagoEfectivo pagoEfectivo = this.servicePagoEfectivo.buscarPagoEfectivo(idEfectivo);
 		PagoTarjeta pagoTarjeta = this.servicePagoTarjeta.buscarpagoTarjeta(idTarjeta);
 		Pago pago = new Pago(idPago, valorPedido, valorEnvio, pagoEfectivo, pagoTarjeta);
@@ -284,6 +289,14 @@ public class Controlador {
 	@RequestMapping(value = "/pago/listarPagos",method=RequestMethod.GET)
 	public List<Pago> listarPago(){
 		return this.servicePago.obtenerTodosPagos();
+	}
+	
+	//====================================================================
+	//  orden
+	//====================================================================
+	@RequestMapping(value = "/orden/listarOrdenes",method=RequestMethod.GET)
+	public List<Orden> listarOrdenes(){
+		return this.serviceOrden.obtenerOrdenes();
 	}
 	
 }
