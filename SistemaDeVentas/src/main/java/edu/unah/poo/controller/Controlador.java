@@ -273,18 +273,7 @@ public class Controlador {
 	//====================================================================
 	//  pago
 	//====================================================================
-	@RequestMapping(value = "/pago/crearPago",method=RequestMethod.GET)
-	public Pago crearPago(@RequestParam(name="idPago") int idPago,
-								  @RequestParam(name="valorPedido") double valorPedido,
-								  @RequestParam(name="valorEnvio") double valorEnvio,
-								  @RequestParam(name="idEfectivo", required = false) int idEfectivo,
-								  @RequestParam(name="idTarjeta", required = false) int idTarjeta) {
-		PagoEfectivo pagoEfectivo = this.servicePagoEfectivo.buscarPagoEfectivo(idEfectivo);
-		PagoTarjeta pagoTarjeta = this.servicePagoTarjeta.buscarpagoTarjeta(idTarjeta);
-		Pago pago = new Pago(idPago, valorPedido, valorEnvio, pagoEfectivo, pagoTarjeta);
-		this.servicePago.crearPago(pago);
-		return pago;
-	}
+
 	
 	@RequestMapping(value = "/pago/listarPagos",method=RequestMethod.GET)
 	public List<Pago> listarPago(){

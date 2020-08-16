@@ -70,8 +70,10 @@ create table pagoTarjeta(idTarjeta int primary key,
 create table pago(idPago int primary key,
                   valorPedido double,
                   valorEnvio double, 
-				  idEfectivo double,
-				  idTarjeta double);
+				  idEfectivo int,
+				  idTarjeta int,
+                  foreign key(idEfectivo) references pagoEfectivo(idEfectivo),
+                  foreign key(idTarjeta) references pagoTarjeta(idTarjeta));
                       
 create table orden(idOrden int primary key,
                    fechaCreacion date,
@@ -86,7 +88,7 @@ create table orden(idOrden int primary key,
 use sistemadeventas;
 
 select * from direccion;
-select * from pagoEfectivo;
+select * from pagoTarjeta;
 select* from pago;
 
 insert cliente values(100, "Jorge Chinchilla", "jorgech@gmail.com", "3798888", 2059.5);
