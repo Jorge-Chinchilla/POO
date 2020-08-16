@@ -28,13 +28,11 @@ public class Pago {
     @JsonBackReference
     private PagoTarjeta pagoTarjeta;
 
-	public Pago(int idPago, double valorPedido, double valorEnvio, PagoEfectivo pagoEfectivo, PagoTarjeta pagoTarjeta) {
+	public Pago(int idPago, double valorPedido, double valorEnvio) {
 		super();
 		this.idPago = idPago;
 		this.valorPedido = valorPedido;
 		this.valorEnvio = valorEnvio;
-		this.pagoEfectivo = pagoEfectivo;
-		this.pagoTarjeta = pagoTarjeta;
 	}
 
 	public int getIdPago() {
