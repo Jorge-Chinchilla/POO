@@ -70,8 +70,8 @@ create table pagoTarjeta(idTarjeta int primary key,
 create table pago(idPago int primary key,
                   valorPedido double,
                   valorEnvio double, 
-				  pagoEfectivo double,
-				  pagoTarjeta double);
+				  idEfectivo double,
+				  idTarjeta double);
                       
 create table orden(idOrden int primary key,
                    fechaCreacion date,
