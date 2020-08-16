@@ -41,7 +41,7 @@ public class ServicePago {
 	}
 
 	public void crearPagoEfectivo(double MontoPago) {
-		PagoEfectivo pagoEfectivo = new PagoEfectivo(2, MontoPago, 0);
+		PagoEfectivo pagoEfectivo = new PagoEfectivo(3, MontoPago, 0);
 		this.repositoryPagoEfectivo.save(pagoEfectivo);
 
 		//Calcular PagoPedido -- No listo

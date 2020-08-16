@@ -18,7 +18,7 @@ public class ControladorPago {
     ServicePago servicePago;
 
     @RequestMapping(value = "/crearPago1",method= RequestMethod.GET)
-    public Pago crearPago1(@RequestParam(name="idPago",required = false) int idPago,
+    public String crearPago1(@RequestParam(name="idPago",required = false) int idPago,
                            @RequestParam(name="metodoPago") int metodoPago,
                            @RequestParam(name="montoPagado") double montoPagado,
                            @RequestParam(name="numeroT", required = false) String numeroT,
@@ -26,9 +26,9 @@ public class ControladorPago {
                            @RequestParam(name="tipoT",required = false) String tipoT,
                            @RequestParam(name="claveT",required = false) String claveT) {
 
+        this.servicePago.crearPagoMaster(idPago,metodoPago,montoPagado,numeroT,expiracionT,tipoT,claveT);
 
-
-        return null;
+        return "";
     }
 
 }
