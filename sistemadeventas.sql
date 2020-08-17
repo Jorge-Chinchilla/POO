@@ -55,7 +55,11 @@ create table despacho(idEstado int primary key,
 create table empleado(idEmpleado int primary key,
                       nombre varchar(64), 
 					  telefono varchar(64),
-					  direccion varchar(64));
+					  direccion varchar(64),
+                      usuario varchar(64),
+                      contrasenia varchar(64),
+                      rol varchar(64),
+                      activo int);
                       
 create table pagoEfectivo(idEfectivo int primary key,
                           montoPagado double,
@@ -92,8 +96,12 @@ select * from pagoTarjeta;
 select* from pago;
 select * from cliente;
 select * from direccion;
+select * from pedido;
+select * from despacho;
 
-delete from direccion where idDireccion = 200;
+delete fromo despacho where idEstado = 500;
+delete from pedido where idPedido = 500;
+delete from direccion where idDireccion = 1001;
 
 insert cliente values(100, "Jorge Chinchilla", "jorgech@gmail.com", "3798888", 2059.5);
 insert direccion values(200, "hogar","La guadalupe",100);

@@ -39,4 +39,8 @@ public class ServiceDireccion {
 		return cliente.getDirecciones();
 	}
 	
+	public boolean exist(int idDireccion) {
+		return this.repositoryDireccion.existsById(idDireccion);
+	}
+	
 }

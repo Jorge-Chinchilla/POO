@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="ISO-8859-1" content="text/html; charset=UTF-8">
-<title>Detalles</title>
+<title>Eliminar Empleado</title>
 
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -21,28 +21,27 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/sistema/principal}">Inicio<span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{/administracion/principal}">Inicio<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleados</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/registrar}">Registrar nuevo Cliente</a>
-          <a class="dropdown-item" th:href="@{/sistema/listarClientes}">Listar Clientes</a>
+          <a class="dropdown-item" th:href="@{/administracion/registrar}">Registrar nuevo Empleado</a>
+          <a class="dropdown-item" th:href="@{/administracion/empleadosListar}">Listado de Empleados</a>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Direcciones</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/añadirDireccion}">Añadir direccion</a>
-          <a class="dropdown-item" th:href="@{/sistema/listarDirecciones}">Listado de direcciones</a>
+          <a class="dropdown-item" th:href="@{/administracion/productoAñadir}">Añadir Productos</a>
+          <a class="dropdown-item" th:href="@{/administracion/inventario}">Inventario</a>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pedido</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Crear pedido</a>
-          <a class="dropdown-item" href="#">Ver pedidos de cliente</a>
-          <a class="dropdown-item" href="#">...</a>
+          <a class="dropdown-item" th:href="@{/administracion/registrarProveedor}">Registrar nuevo proveedor</a>
+          <a class="dropdown-item" th:href="@{/administracion/listarProveedores}">Listado de proveedores</a>
         </div>
       </li>
     </ul> 
@@ -59,8 +58,8 @@
     <h1 class="display-3"></h1>
       <h1 class="display-3"> </h1>
       <h1 class="display-3"> </h1>
-      <h1 class="display-3">Detalles del cliente</h1>
-      <p>En esta pagina se muestran todas las direcciones y pedidos del cliente</p>
+      <h1 class="display-3">Empleado a eliminar</h1>
+      <p>Asegurese de que el empleado que esta tratando de eliminar sea el correcto.</p>
     </div>
   	</div>		
 		
@@ -70,63 +69,34 @@
         <div class="card">
           <h4 class="card-header"><strong>Detalles</strong></h4>              
           <div class="card-body">
-            <form>
+            <form th:action="@{/administracio/eliminarEmpleado}" method="post">
 				<div class="card">
-					<label for="colFormLabelSm">IdCliente: </label>
-					<label for="colFormlabelSm" th:text="${cliente.idCliente}"></label>
+					<label for="colFormLabelSm">IdEmpleado: </label>
+					<input type="number"
+								class="form-control" id="idEmpleado" name="idEmpleado"
+								placeholder="" th:value="${empleado.idEmpleado}" readonly="true">
 				</div>
 				<div class="card">
 					<label for="colFormLabelSm">Nombre: </label>
-					<label for="colFormlabelSm" th:text="${cliente.nombre}"></label>
+					<label for="colFormlabelSm" th:text="${empleado.nombre}"></label>
 				</div>
 				<div class="card">
-					<label for="colFormLabelSm">Email: </label>
-					<label for="colFormlabelSm" th:text="${cliente.email}"></label>
+					<label for="colFormLabelSm">Usuario: </label>
+					<label for="colFormlabelSm" th:text="${empleado.usuario}"></label>
 				</div>
 				<div class="card">
 					<label for="colFormLabelSm">Telefono: </label>
-					<label for="colFormlabelSm" th:text="${cliente.telefono}"></label>
-				</div>
-				<div class="card">
-					<label for="colFormLabelSm">Credito: </label>
-					<label for="colFormlabelSm" th:text="${cliente.credito}"></label>
-				</div>				
+					<label for="colFormlabelSm" th:text="${empleado.telefono}"></label>
+				</div>	
+				<div>
+					<label for="colFormLabelSm"> Esta seguro que desea eliminarlo?</label>
+					<button type="submit" class="btn btn-outline-danger">Eliminar</button>
+				</div>		
 			</form>
           </div>
         </div>
       </div> 
     
-    <h1>Direcciones del cliente</h1>
-    <table  class="table table-hover" >
-	<thead class="thead-dark">
-		<tr>
-			<th>idDir</th>
-			<th>Tipo</th>
-			<th>Direccion</th>
-		</tr>
-	</thead>
-	<tr th:each="tmpdireccion:${direcciones}">
-	<td th:text="${tmpdireccion.idDireccion}"></td>
-	<td th:text="${tmpdireccion.tipo}"></td>
-	<td th:text="${tmpdireccion.direccion}"></td>
-	</tr>
-	</table>
-	
-	    <h1>Pedidos del cliente</h1>
-    <table  class="table table-hover" >
-	<thead class="thead-dark">
-		<tr>
-			<th>idPedido</th>
-			<th>fecha</th>
-			<th>idDireccion</th>
-		</tr>
-	</thead>
-	<tr th:each="tmpPedidos:${pedidos}">
-	<td th:text="${tmpPedidos.idPedido}"></td>
-	<td th:text="${tmpPedidos.fecha}"></td>
-	<td th:text="${tmpPedidos.idDireccion}"></td>
-	</tr>
-	</table>
 		
 	</main>
 

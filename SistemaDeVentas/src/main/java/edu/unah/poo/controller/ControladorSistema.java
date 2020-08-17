@@ -84,6 +84,25 @@ public class ControladorSistema {
 			return "sistema_error";
 		}
 	}
+	
+	@RequestMapping(value ="/sistema/listarDirecciones",method=RequestMethod.GET)
+	public String listarDirecciones(Model model) {
+		List<Direccion> direcciones = this.serviceDireccion.obtenerDirecciones();
+		model.addAttribute("direcciones", direcciones);
+		return "sistema_listar_direcciones";
+	}
+	
+	@RequestMapping(value = "/sistema/direccionEliminar",method=RequestMethod.GET)
+	public String direccionEliminar(@RequestParam(name="idDireccion") int idDireccion, Model model) {
+		if(serviceDireccion.exist(idDireccion)) {
+			Direccion tmpDireccion = this.serviceDireccion.buscarDireccion(idDireccion);
+			model.addAttribute("direccion", tmpDireccion);
+			return "sistema_direccion_eliminar";
+		}else {
+			return "sistema_error";
+		}
+	}	
+	
 	//====================================================================
 	//  Cliente
 	//====================================================================
@@ -120,13 +139,19 @@ public class ControladorSistema {
 	//====================================================================
 	//  direccion
 	//====================================================================
-	@RequestMapping (value = "/cliente/crearDireccion",method=RequestMethod.POST)
+	@RequestMapping (value = "/direccion/crearDireccion",method=RequestMethod.POST)
 	public String crearDireccion(@RequestParam(name = "idCliente") int idCliente,
 								 @RequestParam(name = "idDireccion") int idDireccion,
 								 @RequestParam(name = "tipo") String tipo,
 								 @RequestParam(name = "direccion") String direccion) {
 		Cliente cliente = this.serviceCliente.buscarCliente(idCliente);
 		this.serviceDireccion.crearDireccion(idDireccion, tipo, direccion, cliente);
+		return "sistema_realizado_exitosamente";
+	}
+	
+	@RequestMapping (value = "/direccion/eliminarDireccion",method=RequestMethod.POST)
+	public String eliminarDireccion(@RequestParam(name="idDireccion") int idDireccion) {
+		this.serviceDireccion.eliminarDireccion(idDireccion);
 		return "sistema_realizado_exitosamente";
 	}
 	

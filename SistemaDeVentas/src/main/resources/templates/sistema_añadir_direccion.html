@@ -27,16 +27,14 @@
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" th:href="@{/sistema/registrar}">Registrar nuevo Cliente</a>
-          <a class="dropdown-item" href="#">Buscar Cliente</a>
           <a class="dropdown-item" th:href="@{/sistema/listarClientes}">Listar Clientes</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Direcciones</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Añadir direccion</a>
-          <a class="dropdown-item" href="#">Direcciones cliente</a>
-          <a class="dropdown-item" href="#">Actualizar dirección de cliente</a>
+          <a class="dropdown-item" th:href="@{/sistema/añadirDireccion}">Añadir direccion</a>
+          <a class="dropdown-item" th:href="@{/sistema/listarDirecciones}">Listado de direcciones</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -47,9 +45,9 @@
           <a class="dropdown-item" href="#">...</a>
         </div>
       </li>
-    </ul>
+    </ul> 
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Salir</button>
+      <button class="btn btn-outline-danger" type="submit">Salir</button>
     </form>
   </div>
 </nav>
@@ -74,7 +72,7 @@
 					<strong>Añadir</strong>
 				</h4>
 				<div class="card-body">
-					<form th:action="@{/cliente/crearDireccion}" method="post">
+					<form th:action="@{/direccion/crearDireccion}" method="post">
 						<div class="form-group">
 						<h1>Ingrese el id del cliente</h1>
 							<label for="exampleInputEmail1">IdCliente</label> <input

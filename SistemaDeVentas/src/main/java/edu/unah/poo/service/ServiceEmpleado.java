@@ -30,4 +30,8 @@ public class ServiceEmpleado {
 		return this.repositoryEmpleado.deleteById(id);
 	}
 	
+	public boolean exist(int idEmpleado) {
+		return this.repositoryEmpleado.existsById(idEmpleado);
+	}
+	
 }

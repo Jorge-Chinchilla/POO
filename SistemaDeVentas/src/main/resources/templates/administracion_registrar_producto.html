@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="ISO-8859-1" content="text/html; charset=UTF-8">
-<title>Actualizar cliente</title>
+<title>Registrar Producto</title>
 
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -21,28 +21,27 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/sistema/principal}">Inicio<span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{/administracion/principal}">Inicio<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleados</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/registrar}">Registrar nuevo Cliente</a>
-          <a class="dropdown-item" th:href="@{/sistema/listarClientes}">Listar Clientes</a>
+          <a class="dropdown-item" th:href="@{/administracion/registrar}">Registrar nuevo Empleado</a>
+          <a class="dropdown-item" th:href="@{/administracion/empleadosListar}">Listado de Empleados</a>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Direcciones</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/añadirDireccion}">Añadir direccion</a>
-          <a class="dropdown-item" th:href="@{/sistema/listarDirecciones}">Listado de direcciones</a>
+          <a class="dropdown-item" th:href="@{/administracion/productoAñadir}">Añadir Productos</a>
+          <a class="dropdown-item" th:href="@{/administracion/inventario}">Inventario</a>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pedido</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Crear pedido</a>
-          <a class="dropdown-item" href="#">Ver pedidos de cliente</a>
-          <a class="dropdown-item" href="#">...</a>
+          <a class="dropdown-item" th:href="@{/administracion/registrarProveedor}">Registrar nuevo proveedor</a>
+          <a class="dropdown-item" th:href="@{/administracion/listarProveedores}">Listado de proveedores</a>
         </div>
       </li>
     </ul> 
@@ -59,8 +58,8 @@
     <h1 class="display-3"></h1>
       <h1 class="display-3"> </h1>
       <h1 class="display-3"> </h1>
-      <h1 class="display-3">Actualizacion del cliente</h1>
-      <p>Actualice los campos del cliente.</p>
+      <h1 class="display-3">Registrar nuevo Producto</h1>
+      <p>Al ingresar un producto, este se guardara automaticamente en la base de datos.</p>
     </div>
   	</div>
 		
@@ -72,40 +71,48 @@
 					<strong>Registro de cliente</strong>
 				</h4>
 				<div class="card-body">
-					<form th:action="@{/cliente/actualizarCliente}" method="post">
+					<form th:action="@{/administracion/crearProducto}" method="post">
 						<div class="form-group">
-							<label for="exampleInputEmail1">IdCliente</label> <input type="number"
-								class="form-control" id="idCliente" name="idCliente"
-								placeholder="" th:value="${cliente.idCliente}" readonly="true">
+							<label for="exampleInputEmail1">IdProducto</label> <input
+								type="number" class="form-control" id="idProducto" name="idProducto"
+								placeholder="ingrese un id para el producto" min="5000" max="9999">
 						</div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">Nombre</label> <input type="text"
 								class="form-control" id="nombre" name="nombre"
-								placeholder="ingrese el nombre del cliente" th:value="${cliente.nombre}">
+								placeholder="ingrese el nombre del producto">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Email</label> <input
-								type="text" class="form-control" id="email" name="email"
-								placeholder="ingrese el correo del cliente" th:value="${cliente.email}">
+							<label for="exampleInputEmail1">Unidad</label> <input
+								type="text" class="form-control" id="unidad" name="unidad"
+								placeholder="ingrese la unidad de medida">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Telefono</label> <input
-								type="text" class="form-control" id="telefono" name="telefono"
-								placeholder="ingrese el telefono del cliente" th:value="${cliente.telefono}">
+							<label for="exampleInputEmail1">precio</label> <input
+								type="text" class="form-control" id="precio" name="precio"
+								placeholder="ingrese el precio del producto">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Credito</label> <input
-								type="number" class="form-control" id="credito" name="credito"
-								placeholder="ingrese el credito del cliente" min="0" max="3500" th:value="${cliente.credito}">
-						</div>						
+							<label for="exampleInputEmail1">descripcion</label> <input
+								type="text" class="form-control" id="descripcion" name="descripcion"
+								placeholder="escriba una descripcion del producto">
+						</div>
 						<div class="form-group">
-						<button type="submit" class="btn btn-primary">Actualizar</button>
+							<label for="exampleInputEmail1">cantidad</label> <input
+								type="number" class="form-control" id="cantidad" name="cantidad"
+								placeholder="Asigne una contraseña para el usuario" min="1" max="1000">
+						</div>
+						<div class="form-group">
+							<label for="exampleInputEmail1">idProveedor</label> <input
+								type="number" class="form-control" id="idProveedor" name="idProveedor"
+								placeholder="Asigne una contraseña para el usuario" min="4000" max="4999">
+						</div>
+						<button type="submit" class="btn btn-primary">Registrar</button>
 				</div>
 					</form>
 				</div>
 			</div>
 		</div>
-
 	</main>
 
 <!-- JS, Popper.js, and jQuery -->

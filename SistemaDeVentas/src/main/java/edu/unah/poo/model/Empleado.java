@@ -13,15 +13,24 @@ public class Empleado {
 	private String nombre;
 	private String telefono;
 	private String direccion;
+	private String usuario;
+	private String contrasenia;
+	private String rol;
+	private int activo;
 	
 	public Empleado() {}
 
-	public Empleado(int idEmpleado, String nombre, String telefono, String direccion) {
+	public Empleado(int idEmpleado, String nombre, String telefono, String direccion, String usuario, String contrasenia,
+			String rol, int activo) {
 		super();
 		this.idEmpleado = idEmpleado;
 		this.nombre = nombre;
 		this.telefono = telefono;
 		this.direccion = direccion;
+		this.usuario = usuario;
+		this.contrasenia = contrasenia;
+		this.rol = rol;
+		this.activo = activo;
 	}
 
 	public int getIdEmpleado() {
@@ -55,6 +64,40 @@ public class Empleado {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	public void setContraseña(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
+	public int getActivo() {
+		return activo;
+	}
+
+	public void setActivo(int activo) {
+		this.activo = activo;
+	}
+
+
 	
 	
 

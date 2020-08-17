@@ -22,28 +22,27 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/sistema/principal}">Inicio<span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{/administracion/principal}">Inicio<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleados</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/registrar}">Registrar nuevo Cliente</a>
-          <a class="dropdown-item" th:href="@{/sistema/listarClientes}">Listar Clientes</a>
+          <a class="dropdown-item" th:href="@{/administracion/registrar}">Registrar nuevo Empleado</a>
+          <a class="dropdown-item" th:href="@{/administracion/empleadosListar}">Listado de Empleados</a>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Direcciones</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/añadirDireccion}">Añadir direccion</a>
-          <a class="dropdown-item" th:href="@{/sistema/listarDirecciones}">Listado de direcciones</a>
+          <a class="dropdown-item" th:href="@{/administracion/productoAñadir}">Añadir Productos</a>
+          <a class="dropdown-item" th:href="@{/administracion/inventario}">Inventario</a>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pedido</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Crear pedido</a>
-          <a class="dropdown-item" href="#">Ver pedidos de cliente</a>
-          <a class="dropdown-item" href="#">...</a>
+          <a class="dropdown-item" th:href="@{/administracion/registrarProveedor}">Registrar nuevo proveedor</a>
+          <a class="dropdown-item" th:href="@{/administracion/listarProveedores}">Listado de proveedores</a>
         </div>
       </li>
     </ul> 
@@ -60,47 +59,36 @@
     <div class="container">
     <h1 class="display-3"></h1>
     <h1 class="display-3"></h1>
-      <h1 class="display-3">Bienvenido al sistema!</h1>
-      <p>En este nivel puede manejar la base de los clientes, sus direcciones, pedidos y despachos.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Listar pedidos pendientes&raquo;</a></p>
+      <h1 class="display-3">Bienvenido administrador!</h1>
+      <p>En este nivel se pueden manejar aspectos más importantes del sistema como el registro maestro de empleados, productos y proveedores.</p>
+      <p><a class="btn btn-primary btn-lg" th:href="@{/administracion/inventario}" role="button">Visualizar inventario&raquo;</a></p>
     </div>
   </div>
 
   <div class="container">
     <!-- Example row of columns -->
     <div class="row">
-    
-      <div class="col-md-4">
-        <h2>Actualizar Cliente</h2>
-        	<form class="form-inline my-2 my-lg-0" th:action="@{/sistema/clienteActualizar}">
-				<input class="form-control mr-sm-2" type="number"
-					placeholder="Search" aria-label="Search" id="idCliente" name="idCliente">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-			</form>
-		<p>Ingrese el Id del cliente que desea actualizar. El sistema buscara el cliente para que pueda actualizar sus respectivos campos en la case de datos.</p>
-        <p><a class="btn btn-secondary" th:href="@{/sistema/listarClientes}" role="button">Listado de clientes &raquo;</a></p>
-      </div>
       
       <div class="col-md-4">
-        <h2>Eliminar Cliente</h2>
-        	<form class="form-inline my-2 my-lg-0" th:action="@{/sistema/clienteEliminar}">
+        <h2>Eliminar Empleado</h2>
+        	<form class="form-inline my-2 my-lg-0" th:action="@{/administracion/empleadosEliminar}">
 				<input class="form-control mr-sm-2" type="number"
-					placeholder="Search" aria-label="Search" id="idCliente" name="idCliente">
+					placeholder="Search" aria-label="Search" id="idEmpleado" name="idEmpleado">
 				<button class="btn btn-outline-danger" type="submit">Eliminar</button>
 			</form>
-		<p>Ingrese el id del cliente y este sera eliminado permanentemente de la base de datos. Al presionar eliminar el sistema desplegara los detalles del cliente a eliminar.</p>
-        <p><a class="btn btn-secondary" th:href="@{/sistema/listarClientes}" role="button">Listado de clientes &raquo;</a></p>
+		<p>Ingrese el id del empleado y este sera eliminado permanentemente de la base de datos. Al presionar eliminar el sistema desplegara los detalles del empleado a eliminar.</p>
+        <p><a class="btn btn-secondary" th:href="@{/administracion/empleadosListar}" role="button">Listado de empleados &raquo;</a></p>
       </div>
       
       <div class="col-md-4">
-        <h2>Ver direcciones y pedidos del cliente</h2>
+        <h2>pensar</h2>
 		<p>Recuerda que para ver todas las direcciones o pedidos de un cliente solo debes ir al listado de clientes y seleccionar detalles del cliente, automaticamente se desplegaran todas las direcciones y pedidos de nuestro cliente.</p>
         <p><a class="btn btn-secondary" th:href="@{/sistema/listarClientes}" role="button">Listado de clientes &raquo;</a></p>
       </div>
       
       <div class="col-md-4">
-            <h2>Eliminar direccion</h2>
-        	<form class="form-inline my-2 my-lg-0" th:action="@{/sistema/direccionEliminar}">
+            <h2>pensar</h2>
+        	<form class="form-inline my-2 my-lg-0" th:action="@{/}">
 				<input class="form-control mr-sm-2" type="number"
 					placeholder="Search" aria-label="Search" id="idDireccion" name="idDireccion">
 				<button class="btn btn-outline-danger" type="submit">Eliminar</button>
@@ -110,14 +98,14 @@
       </div>
       
       <div class="col-md-4">
-        <h2>Eliminar Cliente</h2>
-        	<form class="form-inline my-2 my-lg-0" th:action="@{/sistema/clienteEliminar}">
+        <h2>pensar</h2>
+        	<form class="form-inline my-2 my-lg-0" th:action="@{/}">
 				<input class="form-control mr-sm-2" type="number"
 					placeholder="Search" aria-label="Search" id="idCliente" name="idCliente">
 				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Eliminar</button>
 			</form>
 		<p>Ingrese el id del cliente y este sera eliminado permanentemente de la base de datos. Al presionar eliminar el sistema desplegara los detalles del cliente a eliminar.</p>
-        <p><a class="btn btn-secondary" th:href="@{/sistema/listarClientes}" role="button">Listado de clientes &raquo;</a></p>
+        <p><a class="btn btn-secondary" th:href="@{/}" role="button">Listado de clientes &raquo;</a></p>
       </div>
 
     <hr>

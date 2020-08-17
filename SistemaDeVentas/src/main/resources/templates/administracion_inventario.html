@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="ISO-8859-1" content="text/html; charset=UTF-8">
-<title>Cliente agregado</title>
+<title>Inventario</title>
 
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -21,35 +21,32 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/sistema/principal}">Inicio<span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{/administracion/principal}">Inicio<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Empleados</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/registrar}">Registrar nuevo Cliente</a>
-          <a class="dropdown-item" href="#">Buscar Cliente</a>
-          <a class="dropdown-item" th:href="@{/sistema/listarClientes}">Listar Clientes</a>
+          <a class="dropdown-item" th:href="@{/administracion/registrar}">Registrar nuevo Empleado</a>
+          <a class="dropdown-item" th:href="@{/administracion/empleadosListar}">Listado de Empleados</a>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Direcciones</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Productos</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Añadir direccion</a>
-          <a class="dropdown-item" href="#">Direcciones cliente</a>
-          <a class="dropdown-item" href="#">Actualizar dirección de cliente</a>
+          <a class="dropdown-item" th:href="@{/administracion/productoAñadir}">Añadir Productos</a>
+          <a class="dropdown-item" th:href="@{/administracion/inventario}">Inventario</a>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pedido</a>
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Proveedores</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Crear pedido</a>
-          <a class="dropdown-item" href="#">Ver pedidos de cliente</a>
-          <a class="dropdown-item" href="#">...</a>
+          <a class="dropdown-item" th:href="@{/administracion/registrarProveedor}">Registrar nuevo proveedor</a>
+          <a class="dropdown-item" th:href="@{/administracion/listarProveedores}">Listado de proveedores</a>
         </div>
       </li>
-    </ul>
+    </ul> 
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Salir</button>
+      <button class="btn btn-outline-danger" type="submit">Salir</button>
     </form>
   </div>
 </nav>
@@ -61,13 +58,37 @@
     <h1 class="display-3"></h1>
       <h1 class="display-3"> </h1>
       <h1 class="display-3"> </h1>
-      <h1 class="display-3">Cliente Registrado extiosamente.</h1>
-      <p>El cliente ha sido añadido a la base de datos con una direccion, el cliente tiene derecho a más de una direccion.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Lista de Clientes&raquo;</a></p>
+      <h1 class="display-3">Inventario</h1>
+      <p>Este es el registro maestro de productos en donde se puede visualizar todo el inventario a detalle.</p>
     </div>
-  	</div>
+  	</div>		
 		
 	</main>
+
+
+	</header>
+	<table  class="table table-hover" >
+	<thead class="thead-dark">
+		<tr>
+			<th>IdProducto</th>
+			<th>Nombre</th>
+			<th>Unidad</th>
+			<th>Precio</th>
+			<th>Descripcion</th>
+			<th>Cantidad</th>
+			<th>Idproveedor</th>
+		</tr>
+	</thead>
+	<tr th:each="tmpProducto:${productos}">
+	<td th:text="${tmpProducto.idProducto}"></td>
+	<td th:text="${tmpProducto.nombre}"></td>
+	<td th:text="${tmpProducto.unidad}"></td>
+	<td th:text="${tmpProducto.precio}"></td>
+	<td th:text="${tmpProducto.descripcion}"></td>
+	<td th:text="${tmpProducto.cantidad}"></td>
+	<td th:text="${tmpProducto.proveedor.idProveedor}"></td>
+	</tr>
+	</table>
 
 <!-- JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
