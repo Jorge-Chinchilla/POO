@@ -8,4 +8,5 @@ import edu.unah.poo.model.Cliente;
 
 public interface RepositoryCliente extends JpaRepository<Cliente, Integer>{
 	public Cliente findById(int id);
+	public Cliente deleteById(int id);
 }

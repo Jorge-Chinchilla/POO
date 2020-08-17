@@ -2,14 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="ISO-8859-1" content="text/html; charset=UTF-8">
-<title>Registrar Cliente</title>
+<title>Solicitud exitosa</title>
 
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
 <body>
- 
+
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <img th:src="@{/images/sdv1.png}" width="50" height="50">
     <a class="navbar-brand" href="#"></a>
@@ -61,68 +61,12 @@
     <h1 class="display-3"></h1>
       <h1 class="display-3"> </h1>
       <h1 class="display-3"> </h1>
-      <h1 class="display-3">Registrar nuevo cliente</h1>
-      <p>Al ingresar un cliente, este se guardara automaticamente en la base de datos.</p>
+      <h1 class="display-3">Solicitud realizada exitosamente</h1>
+      <p>La solicitud ha sido procesada y actualizada en la base de datos del sistema.</p>
+      <p><a class="btn btn-primary btn-lg" th:href="@{/sistema/principal}" role="button">Volver a inicio&raquo;</a></p>
     </div>
   	</div>
 		
-		<hr>
-		<div class="container">
-
-			<div class="card">
-				<h4 class="card-header">
-					<strong>Registro de cliente</strong>
-				</h4>
-				<div class="card-body">
-					<form th:action="@{/cliente/crearCliente}" method="post">
-						<div class="form-group">
-							<label for="exampleInputEmail1">IdCliente</label> <input
-								type="number" class="form-control" id="id" name="idCliente"
-								placeholder="ingrese un id para el cliente" min="0" max="999">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Nombre</label> <input type="text"
-								class="form-control" id="nombre" name="nombre"
-								placeholder="ingrese el nombre del cliente">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Email</label> <input
-								type="text" class="form-control" id="email" name="email"
-								placeholder="ingrese el correo del cliente">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Telefono</label> <input
-								type="text" class="form-control" id="telefono" name="telefono"
-								placeholder="ingrese el telefono del cliente">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Credito</label> <input
-								type="number" class="form-control" id="credito" name="credito"
-								placeholder="ingrese un id para el cliente" min="1000" max="3500">
-						</div>						
-						<div class="form-group">
-						<h4>Ingrese una direccion para el cliente</h4>
-							<label for="exampleInputEmail1">IdDireccion</label> <input
-								type="number" class="form-control" id="idDireccion" name="idDireccion"
-								placeholder="ingrese un id para la direccion" min="1000" max="2999">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Tipo de direccion</label> <input
-								type="text" class="form-control" id="tipo" name="tipo"
-								placeholder="ingrese el tipo de direccion">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Direccion</label> <input
-								type="text" class="form-control" id="direccion" name="direccion"
-								placeholder="ingrese la direccion del cliente">
-						</div>
-						<button type="submit" class="btn btn-primary">Registrar</button>
-				</div>
-					</form>
-				</div>
-			</div>
-		</div>
-
 	</main>
 
 <!-- JS, Popper.js, and jQuery -->

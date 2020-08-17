@@ -19,6 +19,12 @@ public class ServiceCliente {
 	@Autowired
 	RepositoryDireccion repositoryDireccion;
 	
+	public void crearSoloCliente(int idCliente, String nombre, String email, String telefono,
+			 double credito) { 
+		Cliente cliente = new Cliente(idCliente, nombre, email, telefono, credito);
+		this.repositoryCliente.save(cliente);
+	}
+	
 	public void crearCliente(int idCliente, String nombre, String email, String telefono,
 							 double credito, int idDireccion, String tipo, String direccion) {
 		Cliente cliente = new Cliente(idCliente, nombre, email, telefono, credito);
@@ -32,7 +38,15 @@ public class ServiceCliente {
 		return this.repositoryCliente.findById(id);
 	} 
 	
+	public boolean exist(int idCliente) {
+		return this.repositoryCliente.existsById(idCliente);
+	}
+	
 	public List<Cliente> obtenerClientes(){
 		return this.repositoryCliente.findAll();
 	} 
+	
+	public Cliente eliminarCliente(int id) {
+		return this.repositoryCliente.deleteById(id);
+	}
 }

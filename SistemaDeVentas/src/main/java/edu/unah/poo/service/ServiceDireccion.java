@@ -15,8 +15,11 @@ public class ServiceDireccion {
 	@Autowired
 	RepositoryDireccion repositoryDireccion;
 	
-	public void crearDireccion(Direccion direccion) {
-		this.repositoryDireccion.save(direccion);
+
+	
+	public void crearDireccion(int idDireccion, String tipo, String direccion, Cliente cliente) {
+		Direccion tmpdireccion = new Direccion(idDireccion, tipo, direccion, cliente);
+		this.repositoryDireccion.save(tmpdireccion);
 	}
 	
 	public List<Direccion> obtenerDirecciones(){

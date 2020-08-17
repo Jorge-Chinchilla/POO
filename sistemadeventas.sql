@@ -93,6 +93,8 @@ select* from pago;
 select * from cliente;
 select * from direccion;
 
+delete from direccion where idDireccion = 200;
+
 insert cliente values(100, "Jorge Chinchilla", "jorgech@gmail.com", "3798888", 2059.5);
 insert direccion values(200, "hogar","La guadalupe",100);
 insert proveedor values(300, "sula","22591215","pedidos@sula.hn","08016595294");

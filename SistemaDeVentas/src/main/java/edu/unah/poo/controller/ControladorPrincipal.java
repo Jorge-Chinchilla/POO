@@ -9,7 +9,7 @@ public class ControladorPrincipal {
 	//====================================================================
 	//  pagina principal
 	//====================================================================
-	@GetMapping("/sistema_de_ventas")
+	@GetMapping("/")
 	public String paginaPrincipal() {
 		return "pagina_principal";
 	}
