@@ -215,9 +215,9 @@
 				placeholder="" aria-label="Search" id="cantidad" name="cantidad" min="1" th:max="${p.cantidad}" style="width: 80px">
 	
 	</td>
-	<td><input type="hidden" id="idPedido" name="idPedido" th:value="${pedido.idPedido}"></td>
-	<td><input type="hidden" id="idCliente" name="idCliente" th:value="${cliente.idCliente}"></td>
-	<td>
+	<td> 
+		<input type="hidden" id="idPedido" name="idPedido" th:value="${pedido.idPedido}" style="width: 80px">
+		<input type="hidden" id="idCliente" name="idCliente" th:value="${cliente.idCliente}" style="width: 80px">
 		<button class="btn btn-success" type="submit">Agregar</button>
 	</td>
 	</tr>
