@@ -7,12 +7,14 @@ create table cliente(idCliente int primary key,
                      nombre varchar(64),
 					 email varchar(64),
 					 telefono varchar(64),
-					 credito double);
+					 credito double,
+                     activo int);
                      
 create table direccion(idDireccion int primary key,
                        tipo varchar(64),
 					   direccion varchar(64),
 					   idCliente int,
+                       activo int,
                        foreign key(idCliente) references cliente(idCliente));
 
 create table pedido(idPedido int primary key,
@@ -26,7 +28,8 @@ create table proveedor(idProveedor int primary key,
                        nombre varchar(64),
 					   telefono varchar(64),
 					   email varchar(64),
-					   rtn varchar(64));
+					   rtn varchar(64),
+                       activo int);
            
 create table producto(idProducto int primary key,
                       nombre varchar(64),
@@ -98,8 +101,11 @@ select * from cliente;
 select * from direccion;
 select * from pedido;
 select * from despacho;
+select * from empleado;
+select * from proveedor;
+select * from producto;
 
-delete fromo despacho where idEstado = 500;
+delete from despacho where idEstado = 500;
 delete from pedido where idPedido = 500;
 delete from direccion where idDireccion = 1001;
 

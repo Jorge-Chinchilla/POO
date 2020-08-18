@@ -52,11 +52,12 @@ public class ControladorAdministracion {
 	public String empleadoEliminar(@RequestParam(name="idEmpleado") int idEmpleado, Model model) {
 		if(serviceEmpleado.exist(idEmpleado)) {
 			Empleado tmpEmpleado = this.serviceEmpleado.buscarEmpleado(idEmpleado);
-			model.addAttribute("empleado", tmpEmpleado);
-			return "administracion_empleado_eliminar";
-		}else {
-			return "administracion_error";
+			if(tmpEmpleado.getActivo()!=0) {
+				model.addAttribute("empleado", tmpEmpleado);
+				return "administracion_empleado_eliminar";
+			}
 		}
+		return "administracion_error";		
 	}	
 	
 	@RequestMapping(value ="/administracion/registrarProveedor", method=RequestMethod.GET)
@@ -113,7 +114,7 @@ public class ControladorAdministracion {
 								@RequestParam(name="telefono") String telefono,
 								@RequestParam(name="email") String email,
 								@RequestParam(name="rtn") String rtn) {
-		Proveedor proveedor = new Proveedor(idProveedor, nombre, telefono, email, rtn);
+		Proveedor proveedor = new Proveedor(idProveedor, nombre, telefono, email, rtn, 1);
 		this.serviceProveedor.crearProveedor(proveedor);
 		return "administracion_realizado_exitosamente";
 	}

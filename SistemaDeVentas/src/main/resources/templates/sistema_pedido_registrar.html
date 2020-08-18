@@ -2,13 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="ISO-8859-1" content="text/html; charset=UTF-8">
-<title>Detalles</title>
+<title>Sistema</title>
 
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
 <body>
+
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <img th:src="@{/images/sdv1.png}" width="50" height="50">
@@ -40,9 +41,15 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pedido</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Crear pedido</a>
-          <a class="dropdown-item" href="#">Ver pedidos de cliente</a>
-          <a class="dropdown-item" href="#">...</a>
+          <a class="dropdown-item" th:href="@{/sistema/registrarPedido}">Registrar Pedido</a>
+          <a class="dropdown-item" href="#">Registro de Pedidos</a>
+        </div>
+      </li>
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Despacho</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">Ordenes procesadas</a>
+          <a class="dropdown-item" href="#">Borrador de pedidos</a>
         </div>
       </li>
     </ul> 
@@ -52,85 +59,84 @@
   </div>
 </nav>
 
+
 <main role="main">
 
-	<div class="jumbotron">
-    <div class="container">
-    <h1 class="display-3"></h1>
-      <h1 class="display-3"> </h1>
-      <h1 class="display-3"> </h1>
-      <h1 class="display-3">Detalles del cliente</h1>
-      <p>En esta pagina se muestran todas las direcciones y pedidos del cliente</p>
-    </div>
-  	</div>		
-		
-	<hr>
-      <div class="container"> 
 
-        <div class="card">
-          <h4 class="card-header"><strong>Detalles</strong></h4>              
-          <div class="card-body">
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" align="center" style="height: 350px">
+  <div class="col-md-5 p-lg-5 mx-auto my-5" align="center">
+    <h1 class="display-4 font-weight-normal">Registrar pedido</h1>
+    <p class="lead font-weight-normal">Ingrese el id del cliente asociado con el pedido y asigne un id para el pedido.</p>
+    	<div align="center" style="width: 400px">
+		<form class="form-inline my-2 my-lg-0" th:action="@{/sistema/generarPedido}" method="post">
+			<input class="form-control mr-sm-2" type="number"
+				placeholder="Cliente" aria-label="Search" id="idCliente" name="idCliente" min="1" max="999">
+			<input class="form-control mr-sm-2" type="number"
+				placeholder="Pedido" aria-label="Search" id="idPedido" name="idPedido" min="10000" max="49999">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Crear Pedido</button>
+		</form>
+		</div>
+  </div>
+  <div class="product-device shadow-sm d-none d-md-block"></div>
+  <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div>
+</div>
+
+<div class="d-md-flex flex-md-equal w-100 my-md-3 pl-md-3">
+  <div class="bg-dark mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center text-white overflow-hidden" style="width: 1000px; height: 500px">
+    <div class="my-3 py-3">
+      <h2 class="display-5">Cliente del pedido</h2>
+      <p class="lead">Este pedido esta asociado a este cliente.</p>
+      	<hr>
+      <div class="container" align="center"> 
+
+        <div class="card" style=" width: 400px" align="center">
             <form>
 				<div class="card">
-					<label for="colFormLabelSm">IdCliente: </label>
-					<label for="colFormlabelSm" th:text="${cliente.idCliente}"></label>
+					<h4 style=" color: black">Nombre: </h4>
+					<label for="colFormlabelSm" th:text="Nombre" style=" color: black"></label>
 				</div>
 				<div class="card">
-					<label for="colFormLabelSm">Nombre: </label>
-					<label for="colFormlabelSm" th:text="${cliente.nombre}"></label>
+					<h4 style=" color: black">Email: </h4>
+					<label for="colFormlabelSm" th:text="Email" style=" color: black"></label>
 				</div>
 				<div class="card">
-					<label for="colFormLabelSm">Email: </label>
-					<label for="colFormlabelSm" th:text="${cliente.email}"></label>
+					<h4 style=" color: black">Telefono: </h4>
+					<label for="colFormlabelSm" th:text="Telefono" style=" color: black"></label>
 				</div>
 				<div class="card">
-					<label for="colFormLabelSm">Telefono: </label>
-					<label for="colFormlabelSm" th:text="${cliente.telefono}"></label>
-				</div>
-				<div class="card">
-					<label for="colFormLabelSm">Credito: </label>
-					<label for="colFormlabelSm" th:text="${cliente.credito}"></label>
-				</div>				
+					<h4 style=" color: black">Credito: </h4>
+					<label for="colFormlabelSm" th:text="Credito" style=" color: black"></label>
+				</div>		
 			</form>
-          </div>
         </div>
       </div> 
-    
-    <h1>Direcciones del cliente</h1>
-    <table  class="table table-hover" >
+    </div>
+  </div>
+  
+  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" style="width: 1000px; height: 500px">
+    <div class="my-3 p-3">
+      <h2 class="display-5">Direcciones del cliente</h2>
+      <p class="lead">Elija una direccion del cliente para el pedido.</p>
+      <table  class="table table-hover" >
 	<thead class="thead-dark">
 		<tr>
-			<th>idDir</th>
-			<th>Tipo</th>
+			<th>Tipo de direccion</th>
 			<th>Direccion</th>
+			<th></th>
 		</tr>
 	</thead>
-	<tr th:each="tmpdireccion:${direcciones}">
-	<td th:text="${tmpdireccion.idDireccion}"></td>
-	<td th:text="${tmpdireccion.tipo}"></td>
-	<td th:text="${tmpdireccion.direccion}"></td>
+	<tr each="#">
+	<td text="Hogar"></td>
+	<td text="La Guadalupe"></td>
+	<td>
+	</td>
 	</tr>
 	</table>
-	
-	    <h1>Pedidos del cliente</h1>
-    <table  class="table table-hover" >
-	<thead class="thead-dark">
-		<tr>
-			<th>idPedido</th>
-			<th>fecha</th>
-			<th>idDireccion</th>
-		</tr>
-	</thead>
-	<tr th:each="tmpPedidos:${pedidos}">
-	<td th:text="${tmpPedidos.idPedido}"></td>
-	<td th:text="${tmpPedidos.fechaVenta}"></td>
-	<td th:text="${tmpPedidos.direccion.idDireccion}"></td>
-	</tr>
-	</table>
-		
-	</main>
+    </div>
+  </div>
+</div>
 
-
+</main>
 
 <!-- JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

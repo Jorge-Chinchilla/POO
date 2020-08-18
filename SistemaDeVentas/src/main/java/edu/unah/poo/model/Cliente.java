@@ -18,6 +18,7 @@ public class Cliente {
 	private String email;
 	private String telefono;
 	private double credito;
+	private int activo;
 	
 	@OneToMany(mappedBy="cliente", fetch=FetchType.EAGER)
 	private List<Direccion> direcciones;
@@ -27,13 +28,14 @@ public class Cliente {
 	
 	public Cliente() {}
 
-	public Cliente(int idCliente, String nombre, String email, String telefono, double credito) {
+	public Cliente(int idCliente, String nombre, String email, String telefono, double credito, int activo) {
 		super();
 		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.email = email;
 		this.telefono = telefono;
 		this.credito = credito;
+		this.activo = activo;
 	}
 
 	public int getIdCliente() {
@@ -91,5 +93,15 @@ public class Cliente {
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
+
+	public int getActivo() {
+		return activo;
+	}
+
+	public void setActivo(int activo) {
+		this.activo = activo;
+	}
+	
+	
 	
 }

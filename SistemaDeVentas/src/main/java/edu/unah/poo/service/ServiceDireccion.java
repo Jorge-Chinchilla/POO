@@ -1,5 +1,6 @@
 package edu.unah.poo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,18 @@ public class ServiceDireccion {
 
 	
 	public void crearDireccion(int idDireccion, String tipo, String direccion, Cliente cliente) {
-		Direccion tmpdireccion = new Direccion(idDireccion, tipo, direccion, cliente);
+		Direccion tmpdireccion = new Direccion(idDireccion, tipo, direccion, 1, cliente);
 		this.repositoryDireccion.save(tmpdireccion);
 	}
 	
 	public List<Direccion> obtenerDirecciones(){
-		return this.repositoryDireccion.findAll();
+		List<Direccion> direccionesActivas = new ArrayList<Direccion>();
+		for(Direccion direccion: this.repositoryDireccion.findAll()) {
+			if(direccion.getActivo()==1) {
+				direccionesActivas.add(direccion);
+			}
+		}
+		return direccionesActivas;
 	}
 	
 	public Direccion buscarDireccion(int id){
@@ -31,7 +38,11 @@ public class ServiceDireccion {
 	}
 	
 	public Direccion eliminarDireccion(int id) {
-		return this.repositoryDireccion.deleteById(id);	
+		//return this.repositoryDireccion.deleteById(id);	
+		Direccion direccion = this.buscarDireccion(id);
+		direccion.setActivo(0);
+		this.repositoryDireccion.save(direccion);
+		return direccion;
 	}
 	
 	

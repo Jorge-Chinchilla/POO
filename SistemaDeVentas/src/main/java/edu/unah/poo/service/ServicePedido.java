@@ -14,6 +14,7 @@ public class ServicePedido {
 
 	@Autowired
 	RepositoryPedido repositoryPedido;
+
 	
 	public void crearPedido(Pedido pedido) {
 		this.repositoryPedido.save(pedido);
@@ -31,5 +32,8 @@ public class ServicePedido {
 		return cliente.getPedidos();
 	}
 	
+	public boolean exist(int idPedido) {
+		return this.repositoryPedido.existsById(idPedido);
+	}
 	
 }

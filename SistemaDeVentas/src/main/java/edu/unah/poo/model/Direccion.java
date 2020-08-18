@@ -20,6 +20,7 @@ public class Direccion {
 	private int idDireccion;
 	private String tipo;
 	private String direccion;
+	private int activo;
 	
 	@ManyToOne
 	@JoinColumn(name="idCliente")
@@ -31,11 +32,12 @@ public class Direccion {
 	
 	public Direccion() {}
 
-	public Direccion(int idDireccion, String tipo, String direccion, Cliente cliente) {
+	public Direccion(int idDireccion, String tipo, String direccion, int activo, Cliente cliente) {
 		super();
 		this.idDireccion = idDireccion;
 		this.tipo = tipo;
 		this.direccion = direccion;
+		this.activo= activo;
 		this.cliente = cliente;
 	}
 
@@ -69,6 +71,14 @@ public class Direccion {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public int getActivo() {
+		return activo;
+	}
+
+	public void setActivo(int activo) {
+		this.activo = activo;
 	}
 	
 	

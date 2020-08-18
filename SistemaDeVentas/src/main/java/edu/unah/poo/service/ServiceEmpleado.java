@@ -1,5 +1,6 @@
 package edu.unah.poo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +24,21 @@ public class ServiceEmpleado {
 	}
 	
 	public List<Empleado> obtenerEmpleados(){
-		return this.repositoryEmpleado.findAll();
+		List<Empleado> empleadosActivos = new ArrayList<Empleado>();
+		for(Empleado empleado: this.repositoryEmpleado.findAll()) {
+			if(empleado.getActivo()==1) {
+				empleadosActivos.add(empleado);
+			}
+		}
+		return empleadosActivos;
 	}
 	
 	public Empleado eliminarEmpleado(int id) {
-		return this.repositoryEmpleado.deleteById(id);
+		//return this.repositoryEmpleado.deleteById(id);
+		Empleado empleado = this.buscarEmpleado(id);
+		empleado.setActivo(0);
+		this.crearEmpleado(empleado);
+		return empleado;
 	}
 	
 	public boolean exist(int idEmpleado) {

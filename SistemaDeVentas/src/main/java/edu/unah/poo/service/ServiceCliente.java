@@ -1,5 +1,6 @@
 package edu.unah.poo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,17 +20,15 @@ public class ServiceCliente {
 	@Autowired
 	RepositoryDireccion repositoryDireccion;
 	
-	public void crearSoloCliente(int idCliente, String nombre, String email, String telefono,
-			 double credito) { 
-		Cliente cliente = new Cliente(idCliente, nombre, email, telefono, credito);
+	public void crearSoloCliente(Cliente cliente) { 
 		this.repositoryCliente.save(cliente);
 	}
 	
 	public void crearCliente(int idCliente, String nombre, String email, String telefono,
 							 double credito, int idDireccion, String tipo, String direccion) {
-		Cliente cliente = new Cliente(idCliente, nombre, email, telefono, credito);
+		Cliente cliente = new Cliente(idCliente, nombre, email, telefono, credito, 1);
 		this.repositoryCliente.save(cliente);
-		Direccion tmpDireccion = new Direccion(idDireccion, tipo, direccion, cliente);
+		Direccion tmpDireccion = new Direccion(idDireccion, tipo, direccion, 1, cliente);
 		this.repositoryDireccion.save(tmpDireccion);
 		
 	}
@@ -43,10 +42,25 @@ public class ServiceCliente {
 	}
 	
 	public List<Cliente> obtenerClientes(){
-		return this.repositoryCliente.findAll();
+		List<Cliente> clientesActivos = new ArrayList<Cliente>();
+		for(Cliente cliente: this.repositoryCliente.findAll()) {
+			if(cliente.getActivo()==1) {
+				clientesActivos.add(cliente);
+			}
+		}
+		return clientesActivos;
 	} 
 	
+	
 	public Cliente eliminarCliente(int id) {
-		return this.repositoryCliente.deleteById(id);
+		//return this.repositoryCliente.deleteById(id);
+		Cliente cliente = this.buscarCliente(id);
+		cliente.setActivo(0);
+		for(Direccion direccion: cliente.getDirecciones()) {
+			direccion.setActivo(0);
+			this.repositoryDireccion.save(direccion);
+		}
+		this.repositoryCliente.save(cliente);
+		return cliente;
 	}
 }

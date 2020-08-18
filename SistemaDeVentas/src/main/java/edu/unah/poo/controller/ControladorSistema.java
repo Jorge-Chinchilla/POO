@@ -77,12 +77,13 @@ public class ControladorSistema {
 	@RequestMapping(value = "/sistema/clienteEliminar",method=RequestMethod.GET)
 	public String clienteEliminar(@RequestParam(name="idCliente") int idCliente, Model model) {
 		if(serviceCliente.exist(idCliente)) {
-			Cliente tmpcliente = this.serviceCliente.buscarCliente(idCliente);
-			model.addAttribute("cliente", tmpcliente);
-			return "sistema_cliente_eliminar";
-		}else {
-			return "sistema_error";
+			Cliente tmpCliente = this.serviceCliente.buscarCliente(idCliente);
+			if(tmpCliente.getActivo()!=0) {
+				model.addAttribute("cliente", tmpCliente);
+				return "sistema_cliente_eliminar";
+			}
 		}
+		return "sistema_error";
 	}
 	
 	@RequestMapping(value ="/sistema/listarDirecciones",method=RequestMethod.GET)
@@ -96,11 +97,12 @@ public class ControladorSistema {
 	public String direccionEliminar(@RequestParam(name="idDireccion") int idDireccion, Model model) {
 		if(serviceDireccion.exist(idDireccion)) {
 			Direccion tmpDireccion = this.serviceDireccion.buscarDireccion(idDireccion);
-			model.addAttribute("direccion", tmpDireccion);
-			return "sistema_direccion_eliminar";
-		}else {
-			return "sistema_error";
+			if(tmpDireccion.getActivo()!=0) {
+				model.addAttribute("direccion", tmpDireccion);
+				return "sistema_direccion_eliminar";	
+			}
 		}
+		return "sistema_error";
 	}	
 	
 	//====================================================================
@@ -126,7 +128,8 @@ public class ControladorSistema {
 									@RequestParam(name = "email") String email,
 									@RequestParam(name = "telefono") String telefono,
 									@RequestParam(name = "credito") double credito) {
-		this.serviceCliente.crearSoloCliente(idCliente, nombre, email, telefono, credito);
+		Cliente cliente = new Cliente(idCliente, nombre, email, telefono, credito, 1);
+		this.serviceCliente.crearSoloCliente(cliente);
 		return "sistema_realizado_exitosamente";
 	}
 	
