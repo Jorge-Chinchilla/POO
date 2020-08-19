@@ -32,6 +32,8 @@ public class DataWebSecurity extends WebSecurityConfigurerAdapter {
                 .antMatchers("/sistema/**").hasAnyAuthority("EMPLEADO")
         //Asignar permisos a URLS por Roles
                 .antMatchers("/administracion/**").hasAnyAuthority("ADMINISTRADOR")
+                .antMatchers("/cliente/**").hasAnyAuthority("EMPLEADO")
+                .antMatchers("/direccion/**").hasAnyAuthority("EMPLEADO")
                 .antMatchers("/").permitAll()
                 .antMatchers("/encriptar").permitAll()
                 .anyRequest().authenticated()
