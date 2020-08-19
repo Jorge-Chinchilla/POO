@@ -54,7 +54,8 @@ public class ControladorPedido {
 	//====================================================================	
 	@RequestMapping(value="/sistema/generarPedido", method=RequestMethod.POST)
 	public String generarPedido(@RequestParam(name="idCliente", required=false) String idCliente,
-								@RequestParam(name="idPedido", required=false) String idPedido, Model model) {
+								@RequestParam(name="idPedido", required=false) String idPedido,
+								Model model) {
 		if(idCliente==null || idPedido==null) {
 			return "sistema_error";
 		}else {
@@ -65,25 +66,34 @@ public class ControladorPedido {
 				if(!serviceCliente.exist(c)) {
 					return "sistema_error";
 				}
+				Cliente tmpCliente = this.serviceCliente.buscarCliente(c);
+				List<Producto> inventario = this.serviceProducto.obtenerProductos();
 				Pedido tmpPedido = this.servicePedido.buscarPedido(p);//hay que asignarle  la fecha
 				LocalDate fecha = LocalDate.now();
+
 				tmpPedido.setFechaVenta(fecha);
-				List<Producto> inventario = this.serviceProducto.obtenerProductos();
-				Cliente tmpCliente = this.serviceCliente.buscarCliente(c);
 				model.addAttribute("pedido", tmpPedido);
 				model.addAttribute("cliente", tmpCliente);
 				model.addAttribute("inventario", inventario);
 				model.addAttribute("direcciones", tmpCliente.getDirecciones());
-				
-				List<Producto> productosPedido = new ArrayList<Producto>();
-				List<ListaPedido> listaPedido = this.serviceListaPedido.obtenerListaPedidos();
-				for(ListaPedido relacion: listaPedido) {
-					if(relacion.getIdPedido()==p) {
-						Producto producto = this.serviceProducto.buscarProducto(relacion.getIdProducto());
-						productosPedido.add(producto);
-					}
+
+				List<Producto> productos_de_Pedido = new ArrayList<Producto>();
+
+				for (ListaPedido listaPedido1:tmpPedido.getListaPedido()) {
+					productos_de_Pedido.add(listaPedido1.getProducto());
 				}
-				model.addAttribute("agregados", productosPedido);
+
+				//_--------------------------------------------------------------------------------
+//				List<Producto> productosPedido = new ArrayList<Producto>();
+//				List<ListaPedido> listaPedido = this.serviceListaPedido.obtenerListaPedidos();
+//				for(ListaPedido relacion: listaPedido) {
+//					if(relacion.getIdPedido()==p) {
+//						Producto producto = this.serviceProducto.buscarProducto(relacion.getIdProducto());
+//						productosPedido.add(producto);
+//					}
+//				}
+				//---------------------------------------------------------------------
+				model.addAttribute("agregados", productos_de_Pedido);
 				
 				return "sistema_pedido_datos"; // 
 				
@@ -91,17 +101,19 @@ public class ControladorPedido {
 				if(!serviceCliente.exist(c)) {
 					return "sistema_error";
 				}
-				
+
+				List<Producto> inventario = this.serviceProducto.obtenerProductos();
 				Cliente tmpCliente = this.serviceCliente.buscarCliente(c);
-				//Vamos a obtener una direccion default del cliente, mas adelante se le puede asignar una en especifico.
 				List<Direccion> direcciones = tmpCliente.getDirecciones();
+
+				//Vamos a obtener una direccion default del cliente, mas adelante se le puede asignar una en especifico.
 				Pedido tmpPedido = new Pedido(p, LocalDate.now(), tmpCliente, direcciones.get(0));
 				this.servicePedido.crearPedido(tmpPedido);
-				List<Producto> inventario = this.serviceProducto.obtenerProductos();
+
 				model.addAttribute("pedido", tmpPedido);
 				model.addAttribute("cliente", tmpCliente);
 				model.addAttribute("inventario", inventario);
-				model.addAttribute("direcciones", tmpCliente.getDirecciones());
+				model.addAttribute("direcciones", direcciones);
 				
 				return "sistema_pedido_datos"; // 
 			}
@@ -123,30 +135,25 @@ public class ControladorPedido {
 								  @RequestParam(name="idCliente") int idCliente,
 								  Model model) {
 		
-		Pedido tmpPedido = this.servicePedido.buscarPedido(idPedido);
-		Producto tmpProducto = this.serviceProducto.buscarProducto(idProducto);
-		ListaPedido listaPedido =  new ListaPedido(idPedido, idProducto, cantidad, tmpProducto.getPrecio(), tmpPedido, tmpProducto);
-		this.serviceListaPedido.crearListaPedido(listaPedido);
-		
-		Pedido tmpPedido1 = this.servicePedido.buscarPedido(idPedido);
-		Cliente tmpCliente1 = this.serviceCliente.buscarCliente(idCliente);
-		List<Producto> inventario1 = this.serviceProducto.obtenerProductos();
-		
-		List<Producto> productosPedido1 = new ArrayList<Producto>();
-		List<ListaPedido> listaPedido1 = new ArrayList<ListaPedido>();
-		
-		for(ListaPedido relacion: listaPedido1) {
-			if(relacion.getIdPedido()==idPedido) {
-				Producto producto1 = this.serviceProducto.buscarProducto(relacion.getIdProducto());
-				productosPedido1.add(producto1);
-			}
+		Pedido pedido = this.servicePedido.buscarPedido(idPedido); //pedido con el cual se esta trabajando
+		Cliente cliente = this.serviceCliente.buscarCliente(idCliente); //cliente al que pertenece el pedido
+		Producto producto = this.serviceProducto.buscarProducto(idProducto); //producto que se esta agregando
+		List<Producto> inventario1 = this.serviceProducto.obtenerProductos(); //Todos los Productos en la base
+
+		ListaPedido listaPedido =  new ListaPedido(idPedido, idProducto, cantidad, producto.getPrecio(), pedido, producto);
+		this.serviceListaPedido.crearListaPedido(listaPedido); //Guardar registro en la base
+
+		List<Producto> productos_de_Pedido = new ArrayList<Producto>();
+
+		for (ListaPedido listaPedido1:pedido.getListaPedido()) {
+			productos_de_Pedido.add(listaPedido1.getProducto());
 		}
-		
-		model.addAttribute("pedido", tmpPedido1);
-		model.addAttribute("cliente", tmpCliente1);
+
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("cliente", cliente);
 		model.addAttribute("inventario", inventario1);
-		model.addAttribute("direcciones", tmpCliente1.getDirecciones());
-		model.addAttribute("agregados", productosPedido1);
+		model.addAttribute("direcciones", cliente.getDirecciones());
+		model.addAttribute("agregados", productos_de_Pedido);
 		
 		return "sistema_pedido_datos";
 		
