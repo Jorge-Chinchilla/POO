@@ -119,7 +119,7 @@
 	<tr th:each="tmpDireccion:${direcciones}">
 					<form th:action="@{/sistema/cambiarDireccion}" method="post">
 						<input class="form-control mr-sm-2" type="hidden"
-									placeholder="" aria-label="Search" id="idDireccion" name="idDireccion" style="width: 80px" th:value="${pedido.direccion.idDireccion}">				
+									placeholder="" aria-label="Search" id="idDireccion" name="idDireccion" style="width: 80px" th:value="${tmpDireccion.idDireccion}">				
 					
 						<td th:text="${tmpDireccion.tipo}" style=" color: black"></td>
 						<td th:text="${tmpDireccion.direccion}" style=" color: black"></td>
