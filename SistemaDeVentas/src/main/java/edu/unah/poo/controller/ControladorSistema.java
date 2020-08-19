@@ -48,7 +48,7 @@ public class ControladorSistema {
 	}
 	
 	@GetMapping("/sistema/clienteDetalles/{id}")
-	public String detallesMecanico(@PathVariable("id") int idCliente, Model model) {
+	public String detallesCliente(@PathVariable("id") int idCliente, Model model) {
 		Cliente cliente = this.serviceCliente.buscarCliente(idCliente);
 		List<Direccion> direcciones= cliente.getDirecciones();
 		List<Pedido> pedidos = cliente.getPedidos();
@@ -104,6 +104,11 @@ public class ControladorSistema {
 		}
 		return "sistema_error";
 	}	
+	
+	@RequestMapping(value = "/sistema/realizado",method=RequestMethod.GET)
+	public String realizado() {
+		return "sistema_realizado_exitosamente";
+	}
 	
 	//====================================================================
 	//  Cliente

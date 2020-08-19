@@ -65,8 +65,9 @@
 <div class=" text-center bg-light" align="center" style="height: 180px">
   <div class="col-md-5 p-lg-5 mx-auto my-5" align="center">
     <h1 class="display-4 font-weight-normal">Datos del pedido</h1>
-    <button th:href="@{/sistema/guardarEnBorrador}" type="submit" class="btn btn-outline-secondary">Pedido ya se encuentra en borrador</button>
-    <button type="submit" class="btn btn-outline-success">Procesar</button>
+    <a th:href="@{/sistema/realizado}" type="submit" class="btn btn-outline-secondary">Pedido ya se encuentra en borrador</a>
+    
+    <a th:href= "@{/sistema/procesarPedido/{id} (id=${pedido.idPedido}) }" type="submit" class="btn btn-outline-success">Procesar</a>
     <p class="lead font-weight-normal"></p>
   </div>
   <div class="product-device shadow-sm d-none d-md-block"></div>
