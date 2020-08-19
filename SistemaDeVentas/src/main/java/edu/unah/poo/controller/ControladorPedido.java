@@ -1,8 +1,10 @@
 package edu.unah.poo.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import edu.unah.poo.function.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,9 @@ import edu.unah.poo.service.ServiceDireccion;
 import edu.unah.poo.service.ServiceListaPedido;
 import edu.unah.poo.service.ServicePedido;
 import edu.unah.poo.service.ServiceProducto;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 @Controller
 public class ControladorPedido {
@@ -200,5 +205,6 @@ public class ControladorPedido {
 		model.addAttribute("agregados", registro_de_pedido);
 		return "sistema_pedido_datos";
 	}
+
 	
 }
