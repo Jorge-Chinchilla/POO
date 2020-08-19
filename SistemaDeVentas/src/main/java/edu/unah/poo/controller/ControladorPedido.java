@@ -17,6 +17,7 @@ import edu.unah.poo.model.ListaPedido;
 import edu.unah.poo.model.Pedido;
 import edu.unah.poo.model.Producto;
 import edu.unah.poo.service.ServiceCliente;
+import edu.unah.poo.service.ServiceDireccion;
 import edu.unah.poo.service.ServiceListaPedido;
 import edu.unah.poo.service.ServicePedido;
 import edu.unah.poo.service.ServiceProducto;
@@ -35,6 +36,9 @@ public class ControladorPedido {
 	
 	@Autowired
 	ServiceListaPedido serviceListaPedido;
+	
+	@Autowired
+	ServiceDireccion serviceDireccion;
 	
 	//====================================================================
 	//  Plantillas
@@ -156,7 +160,37 @@ public class ControladorPedido {
 		model.addAttribute("agregados", productos_de_Pedido);
 		
 		return "sistema_pedido_datos";
-		
 	}
+	
+	//====================================================================
+	//  direccion
+	//====================================================================	
+	@RequestMapping(value="/sistema/cambiarDireccion", method=RequestMethod.POST)
+	public String cambiarDireccion(@RequestParam(value="idDireccion") int idDireccion,
+								   @RequestParam(value="idPedido") int idPedido,
+								   @RequestParam(value="idCliente") int idCliente,
+								   Model model) {
+		Pedido pedido = this.servicePedido.buscarPedido(idPedido);
+		Direccion direccion = this.serviceDireccion.buscarDireccion(idDireccion);
+		pedido.setDireccion(direccion);
+		this.servicePedido.crearPedido(pedido);
+		
+		Cliente cliente = this.serviceCliente.buscarCliente(idCliente);
+		List<Producto> inventario = this.serviceProducto.obtenerProductos();
+		List<Producto> productos_de_Pedido = new ArrayList<Producto>();
+
+		for (ListaPedido listaPedido1:pedido.getListaPedido()) {
+			productos_de_Pedido.add(listaPedido1.getProducto());
+		}		
+		
+		
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("cliente", cliente);
+		model.addAttribute("inventario", inventario);
+		model.addAttribute("direcciones", cliente.getDirecciones());
+		model.addAttribute("agregados", productos_de_Pedido);
+		return "sistema_pedido_datos";
+	}
+	
 	
 }
