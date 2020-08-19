@@ -189,7 +189,7 @@ public class ControladorPedido {
 		
 		Cliente cliente = this.serviceCliente.buscarCliente(idCliente);
 		List<Producto> inventario = this.serviceProducto.obtenerProductos();
-		
+
 
 		List<ListaPedido> registro_de_pedido = pedido.getListaPedido();
 		
