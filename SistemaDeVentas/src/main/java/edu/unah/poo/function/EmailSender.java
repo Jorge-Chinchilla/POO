@@ -10,7 +10,7 @@ import javax.mail.Message;
 public class EmailSender {
 
     private String Sender = "jorgechinchillafk@gmail.com";
-    private String Password = "";
+    private String Password = "unapalabra";
     private String Receiver;
     private String Subject;
     private String MessageToSend;

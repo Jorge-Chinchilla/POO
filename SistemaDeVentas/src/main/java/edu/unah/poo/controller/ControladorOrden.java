@@ -92,7 +92,7 @@ public class ControladorOrden {
 		double valorDeEnvio = 55;
 		
 		
-		Pago pago = new Pago(1, valorDeOrden, valorDeOrden);
+		Pago pago = new Pago(1, valorDeOrden, valorDeEnvio);
 		this.servicePago.crearPago(pago);
 		
 		Orden orden = new Orden(idOrden, LocalDate.now(), fechaEntrega, empleado, pago, pedido);
@@ -111,7 +111,7 @@ public class ControladorOrden {
 		//Desarrollamos el email para el cliente
 		Cliente cliente = pedido.getCliente();
 		EmailSender emailSender = new EmailSender(cliente.getEmail(),
-                "Orden lista",
+                "Su Orden fue procesada",
                 "Hola,\n Tu pedido con numero de orden "+orden.getIdOrden()+" ya fue procesado!\n\nEl total del pedido es: "+orden.getPago().getValorPedido() +"lps y "+orden.getPago().getValorEnvio()+"lps de envio. \n\n Gracias por preferirnos");
         try {
             emailSender.sendmail();

@@ -162,6 +162,16 @@ public class ControladorPedido {
 	@RequestMapping(value ="/sistema/procesarPedido/{id}", method=RequestMethod.GET)
 	public String procesar(@PathVariable("id") int idPedido, Model model) {
 		Pedido pedido = this.servicePedido.buscarPedido(idPedido);
+		
+		List<ListaPedido> productos= pedido.getListaPedido();
+		List<Producto> inventario = this.serviceProducto.obtenerProductos();
+		for(ListaPedido productoPedido: productos) {
+			Producto producto = this.serviceProducto.buscarProducto(productoPedido.getIdProducto());
+			if(producto.getCantidad()<productoPedido.getCantidad()) {
+				return "sistema_error";
+			}
+		}
+		
 		model.addAttribute("pedido", pedido);
 		return "sistema_pedido_procesar";
 	}

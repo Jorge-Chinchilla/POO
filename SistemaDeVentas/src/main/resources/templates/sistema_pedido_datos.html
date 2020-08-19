@@ -179,7 +179,6 @@
 			<th>Unidad</th>
 			<th>precio</th>
 			<th>cantidad en el pedido<th>
-			<th></th>
 		</tr>
 	</thead>
 	<tr th:each="registro:${agregados}">
@@ -187,9 +186,7 @@
 	<td th:text="${registro.getProducto().getUnidad()}"></td>
 	<td th:text="${registro.getProducto().getPrecio()}"></td>
 	<td th:text="${registro.cantidad}"></td>
-	<td>
-		<a href= "#" class="btn btn-outline-danger" type="submit">Remover</a>
-	</td>
+
 	</tr>
 	</table>
       
