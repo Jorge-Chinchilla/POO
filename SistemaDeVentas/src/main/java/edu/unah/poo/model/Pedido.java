@@ -1,12 +1,9 @@
 package edu.unah.poo.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -22,11 +19,14 @@ public class Pedido {
 	@JoinColumn(name="idCliente")
 	@JsonBackReference
 	private Cliente cliente;
-	
+
 	@ManyToOne
 	@JoinColumn(name="idDireccion")
 	@JsonBackReference
 	private Direccion direccion;
+
+	@OneToMany(mappedBy = "pedido",fetch = FetchType.LAZY)
+	private List<ListaPedido> listaPedido;
     
 	public Pedido() {}
 
@@ -68,6 +68,14 @@ public class Pedido {
 
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}
+
+	public List<ListaPedido> getListaPedido() {
+		return listaPedido;
+	}
+
+	public void setListaPedido(List<ListaPedido> listaPedido) {
+		this.listaPedido = listaPedido;
 	}
 	
 }
