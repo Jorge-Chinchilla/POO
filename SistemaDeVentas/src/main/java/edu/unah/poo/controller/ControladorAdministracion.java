@@ -1,10 +1,13 @@
 package edu.unah.poo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +30,9 @@ public class ControladorAdministracion {
 	
 	@Autowired
 	ServiceProducto serviceProducto;
+
+	@Autowired
+	PasswordEncoder passwordEncoder;
 
 	//====================================================================
 	//  Plantillas
@@ -94,7 +100,7 @@ public class ControladorAdministracion {
 								@RequestParam(name="direccion") String direccion,
 								@RequestParam(name="usuario") String usuario,
 								@RequestParam(name="contrasenia") String contrasenia) {
-		Empleado empleado = new Empleado(idEmpleado, nombre, telefono, direccion, usuario, contrasenia, "mecanico", 1);
+		Empleado empleado = new Empleado(idEmpleado, nombre, telefono, direccion, passwordEncoder.encode(usuario), contrasenia, "mecanico", 1);
 		this.serviceEmpleado.crearEmpleado(empleado);
 		return "administracion_realizado_exitosamente";
 	}
@@ -135,5 +141,16 @@ public class ControladorAdministracion {
 		this.serviceProducto.crearProducto(producto);
 		return "administracion_realizado_exitosamente";
 	}
-			
+
+	@GetMapping(value = "/encriptar")
+	public String encriptarContraseña(){
+		List<Empleado> empleados = this.serviceEmpleado.obtenerEmpleados();
+		String contrasenia;
+		for (Empleado emp:empleados) {
+			contrasenia = passwordEncoder.encode(emp.getContrasenia());
+			emp.setContraseña(contrasenia);
+			this.serviceEmpleado.crearEmpleado(emp);
+		}
+		return "encriptar";
+	}
 }
