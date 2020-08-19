@@ -143,6 +143,13 @@ public class ControladorPedido {
 		model.addAttribute("cliente", cliente);
 		return "sistema_pedido_detalles";
 	}
+	
+	@RequestMapping(value ="/sistema/procesarPedido/{id}", method=RequestMethod.GET)
+	public String procesar(@PathVariable("id") int idPedido, Model model) {
+		Pedido pedido = this.servicePedido.buscarPedido(idPedido);
+		model.addAttribute("pedido", pedido);
+		return "sistema_pedido_procesar";
+	}
 
 	//====================================================================
 	//  producto
