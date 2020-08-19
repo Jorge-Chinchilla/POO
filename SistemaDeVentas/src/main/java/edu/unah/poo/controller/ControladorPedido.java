@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -123,6 +125,24 @@ public class ControladorPedido {
 	@RequestMapping(value= "/sistema/crearPedido", method=RequestMethod.POST)
 	public String crearPedido() {
 		return "";
+	}
+	
+	@RequestMapping(value = "/sistema/listarPedidos",method=RequestMethod.GET)
+	public String listarPedidos(Model model) {
+		List<Pedido> pedidos = this.servicePedido.obtenerPedidos();
+		model.addAttribute("pedidos", pedidos);
+		return "sistema_listar_pedidos";
+	}
+	
+	@GetMapping("/sistema/pedidoDetalles/{id}")
+	public String pedidoDetalles(@PathVariable("id") int idPedido, Model model) {
+		Pedido pedido = this.servicePedido.buscarPedido(idPedido);
+		List<ListaPedido> listaPedido = pedido.getListaPedido();
+		Cliente cliente = this.serviceCliente.buscarCliente(pedido.getCliente().getIdCliente());
+		model.addAttribute("listaPedido", listaPedido);
+		model.addAttribute("pedido", pedido);
+		model.addAttribute("cliente", cliente);
+		return "sistema_pedido_detalles";
 	}
 
 	//====================================================================
