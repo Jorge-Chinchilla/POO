@@ -5,14 +5,23 @@ import javax.mail.internet.*;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Properties;
+import javax.mail.Message;
 
 public class EmailSender {
 
-    private String Sender;
-    private String Password;
+    private String Sender = "8bit1.0k@gmail.com";
+    private String Password = "j10g769ls";
     private String Receiver;
+    private String Subject;
+    private String MessageToSend;
 
-    private void sendmail() throws AddressException, MessagingException, IOException {
+    public EmailSender(String receiver, String subject, String messageToSend) {
+        Receiver = receiver;
+        Subject = subject;
+        MessageToSend = messageToSend;
+    }
+
+    public void sendmail() throws AddressException, MessagingException, IOException {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -21,26 +30,26 @@ public class EmailSender {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("tutorialspoint@gmail.com" , "<your password>");
+                return new PasswordAuthentication(Sender , Password);
             }
         });
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("tutorialspoint@gmail.com" , false));
+        msg.setFrom(new InternetAddress(Sender , false));
 
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("tutorialspoint@gmail.com"));
-        msg.setSubject("Tutorials point email");
-        msg.setContent("Tutorials point email", "text/html");
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(Receiver));
+        msg.setSubject(Subject);
+        msg.setContent("SistemaDeVentas", "text/html");
         msg.setSentDate(new Date());
 
         MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent("Tutorials point email", "text/html");
+        messageBodyPart.setContent(MessageToSend, "text/html");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
-        MimeBodyPart attachPart = new MimeBodyPart();
-
-        attachPart.attachFile("/var/tmp/image19.png");
-        multipart.addBodyPart(attachPart);
+//        MimeBodyPart attachPart = new MimeBodyPart();
+//
+//        attachPart.attachFile("/static/images/sdv.png");
+//        multipart.addBodyPart(attachPart);
         msg.setContent(multipart);
         Transport.send(msg);
 
