@@ -3,7 +3,10 @@ package edu.unah.poo.controller;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.criteria.Order;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.unah.poo.model.Cliente;
 import edu.unah.poo.model.Direccion;
+import edu.unah.poo.model.Empleado;
 import edu.unah.poo.model.ListaPedido;
+import edu.unah.poo.model.Orden;
 import edu.unah.poo.model.Pedido;
 import edu.unah.poo.model.Producto;
 import edu.unah.poo.service.ServiceCliente;
 import edu.unah.poo.service.ServiceDireccion;
+import edu.unah.poo.service.ServiceEmpleado;
 import edu.unah.poo.service.ServiceListaPedido;
+import edu.unah.poo.service.ServiceOrden;
 import edu.unah.poo.service.ServicePedido;
 import edu.unah.poo.service.ServiceProducto;
 
@@ -40,6 +47,7 @@ public class ControladorPedido {
 	
 	@Autowired
 	ServiceDireccion serviceDireccion;
+
 	
 	//====================================================================
 	//  Plantillas
@@ -150,7 +158,7 @@ public class ControladorPedido {
 		model.addAttribute("pedido", pedido);
 		return "sistema_pedido_procesar";
 	}
-
+	
 	//====================================================================
 	//  producto
 	//====================================================================	
@@ -179,6 +187,7 @@ public class ControladorPedido {
 		
 		return "sistema_pedido_datos";
 	}
+
 	
 	//====================================================================
 	//  direccion
