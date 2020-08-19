@@ -80,7 +80,7 @@ public class Pedido {
 		this.listaPedido = listaPedido;
 	}
 
-	public boolean isEstado() {
+	public boolean getEstado() {
 		return estado;
 	}
 
