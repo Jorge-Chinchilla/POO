@@ -171,11 +171,11 @@
 			<th></th>
 		</tr>
 	</thead>
-	<tr th:each="producto:${agregados}">
-	<td th:text="${producto.nombre}"></td>
-	<td th:text="${producto.unidad}"></td>
-	<td th:text="${producto.precio}"></td>
-	<td th:text="${producto.cantidad}"></td>
+	<tr th:each="registro:${agregados}">
+	<td th:text="${registro.getProducto().getNombre()}"></td>
+	<td th:text="${registro.getProducto().getUnidad()}"></td>
+	<td th:text="${registro.getProducto().getPrecio()}"></td>
+	<td th:text="${registro.cantidad}"></td>
 	<td>
 		<a href= "#" class="btn btn-outline-danger" type="submit">Remover</a>
 	</td>

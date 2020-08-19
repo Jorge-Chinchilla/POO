@@ -77,11 +77,7 @@ public class ControladorPedido {
 				model.addAttribute("inventario", inventario);
 				model.addAttribute("direcciones", tmpCliente.getDirecciones());
 
-				List<Producto> productos_de_Pedido = new ArrayList<Producto>();
-
-				for (ListaPedido listaPedido1:tmpPedido.getListaPedido()) {
-					productos_de_Pedido.add(listaPedido1.getProducto());
-				}
+				List<ListaPedido> registro_de_pedido = tmpPedido.getListaPedido();
 
 				//_--------------------------------------------------------------------------------
 //				List<Producto> productosPedido = new ArrayList<Producto>();
@@ -93,7 +89,7 @@ public class ControladorPedido {
 //					}
 //				}
 				//---------------------------------------------------------------------
-				model.addAttribute("agregados", productos_de_Pedido);
+				model.addAttribute("agregados", registro_de_pedido);
 				
 				return "sistema_pedido_datos"; // 
 				
@@ -143,17 +139,13 @@ public class ControladorPedido {
 		ListaPedido listaPedido =  new ListaPedido(idPedido, idProducto, cantidad, producto.getPrecio(), pedido, producto);
 		this.serviceListaPedido.crearListaPedido(listaPedido); //Guardar registro en la base
 
-		List<Producto> productos_de_Pedido = new ArrayList<Producto>();
-
-		for (ListaPedido listaPedido1:pedido.getListaPedido()) {
-			productos_de_Pedido.add(listaPedido1.getProducto());
-		}
+		List<ListaPedido> registro_de_pedido = pedido.getListaPedido();
 
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("inventario", inventario1);
 		model.addAttribute("direcciones", cliente.getDirecciones());
-		model.addAttribute("agregados", productos_de_Pedido);
+		model.addAttribute("agregados", registro_de_pedido);
 		
 		return "sistema_pedido_datos";
 		
