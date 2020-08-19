@@ -17,6 +17,10 @@ public class ServiceOrden {
 	public void crearOrden(Orden orden) {
 		this.repositoryOrden.save(orden);
 	}
+	
+	public Orden buscarOrden(int id) {
+		return this.repositoryOrden.findById(id);
+	}
 
 	public List<Orden> obtenerOrdenes(){
 		return this.repositoryOrden.findAll();

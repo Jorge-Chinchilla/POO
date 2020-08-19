@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Orden {
 
 	@Id
+	private int idOrden;
 	private LocalDate fechaCreacion;
 	private LocalDate fechaEntrega;
 	
@@ -32,10 +33,15 @@ public class Orden {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idPedido")
     @JsonBackReference
-    private Pedido pedido;
 
-	public Orden(LocalDate fechaCreacion, LocalDate fechaEntrega, Empleado empleado, Pago pago, Pedido pedido) {
+    private Pedido pedido;
+    
+    public Orden() {}
+
+	public Orden(int idOrden, LocalDate fechaCreacion, LocalDate fechaEntrega, Empleado empleado, Pago pago,
+			Pedido pedido) {
 		super();
+		this.idOrden = idOrden;
 		this.fechaCreacion = fechaCreacion;
 		this.fechaEntrega = fechaEntrega;
 		this.empleado = empleado;
@@ -81,6 +87,14 @@ public class Orden {
 
 	public void setPedido(Pedido pedido) {
 		this.pedido = pedido;
+	}
+
+	public int getIdOrden() {
+		return idOrden;
+	}
+
+	public void setIdOrden(int idOrden) {
+		this.idOrden = idOrden;
 	}
     
     

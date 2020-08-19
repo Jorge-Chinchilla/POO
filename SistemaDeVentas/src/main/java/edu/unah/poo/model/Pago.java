@@ -30,12 +30,16 @@ public class Pago {
 
     public Pago(){}
 
+
+
 	public Pago(int idPago, double valorPedido, double valorEnvio) {
 		super();
 		this.idPago = idPago;
 		this.valorPedido = valorPedido;
 		this.valorEnvio = valorEnvio;
 	}
+
+
 
 	public int getIdPago() {
 		return idPago;

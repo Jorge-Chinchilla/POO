@@ -2,14 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="ISO-8859-1" content="text/html; charset=UTF-8">
-<title>Procesar orden</title>
+<title>Listado de Ordenes</title>
 
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
 <body>
-
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <img th:src="@{/images/sdv1.png}" width="50" height="50">
@@ -28,88 +27,67 @@
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Clientes</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" th:href="@{/sistema/registrar}">Registrar nuevo Cliente</a>
+          <a class="dropdown-item" href="#">Buscar Cliente</a>
           <a class="dropdown-item" th:href="@{/sistema/listarClientes}">Listar Clientes</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Direcciones</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/añadirDireccion}">Añadir direccion</a>
-          <a class="dropdown-item" th:href="@{/sistema/listarDirecciones}">Listado de direcciones</a>
+          <a class="dropdown-item" href="#">Añadir direccion</a>
+          <a class="dropdown-item" href="#">Direcciones cliente</a>
+          <a class="dropdown-item" href="#">Actualizar dirección de cliente</a>
         </div>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pedido</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/registrarPedido}">Registrar Pedido</a>
-          <a class="dropdown-item" th:href="@{/sistema/listarPedidos}">Registro de Pedidos</a>
+          <a class="dropdown-item" href="#">Crear pedido</a>
+          <a class="dropdown-item" href="#">Ver pedidos de cliente</a>
+          <a class="dropdown-item" href="#">...</a>
         </div>
       </li>
-            <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Despacho</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Ordenes procesadas</a>
-          <a class="dropdown-item" href="#">Borrador de pedidos</a>
-        </div>
-      </li>
-    </ul> 
+    </ul>
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-danger" type="submit">Salir</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Salir</button>
     </form>
   </div>
 </nav>
 
 <main role="main">
 
-  <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
+	<div class="jumbotron">
     <div class="container">
     <h1 class="display-3"></h1>
-    <h1 class="display-3"></h1>
-      <h1 class="display-3">Orden a Procesar</h1>
-      <p>Recuerda confirmar tu id de empleado para confirmar la orden.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Listar pedidos pendientes&raquo;</a></p>
+      <h1 class="display-3"> </h1>
+      <h1 class="display-3"> </h1>
+      <h1 class="display-3">Registro de ordenes procesadas</h1>
+      <p>En esta pagina se puede ver el registro de todas las ordenes de la base de datos.</p>
     </div>
-  </div>
+  	</div>		
+		
+	</main>
 
-	<hr>
-		<div class="container">
-
-			<div class="card">
-				<h4 class="card-header">
-					<strong>Registro de orden</strong>
-				</h4>
-				<div class="card-body">
-					<form th:action="@{/sistema/crearOrden}" method="post">
-						<div class="form-group">
-							<label for="exampleInputEmail1">IdPedido</label> <input
-								type="number" class="form-control" id="idPedido" name="idPedido"
-								placeholder="" th:value="${pedido.idPedido}" readonly="true">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">IdOrden</label> <input
-								type="number" class="form-control" id="idOrden" name="idOrden"
-								placeholder="Asigne un numero de id" min="50000" max="99999">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Fecha de Entrega</label> <input type="String"
-								class="form-control" id="fechaEntrega" name="fechaEntrega"
-								placeholder="ingrese la fecha de entrega	">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Confirmar ID de empleado responsable</label><input
-								type="number" class="form-control" id="idEmpleado" name="idEmpleado"
-								placeholder="confirme su id" min="3000" max="3999">
-						</div>					
-						<button type="submit" class="btn btn-primary">Procesar</button>
-					</form>
-				</div>
-			</div>
-		</div>
-
-</main>
-
-
+	</header>
+	<table  class="table table-hover" >
+	<thead class="thead-dark">
+		<tr>
+			<th>idOrden</th>
+			<th>Fecha de Creacion</th>
+			<th>Fecha de Entrega</th>
+			<th>IdEmpleado</th>
+			<th>IdPedido</th>
+		</tr>
+	</thead>
+	<tr th:each="orden:${ordenes}">
+	<td th:text="${orden.idOrden}"></td>
+	<td th:text="${orden.fechaCreacion}"></td>
+	<td th:text="${orden.fechaEntrega}"></td>
+	<td th:text="${orden.empleado.idEmpleado}"></td>
+	<td th:text="${orden.pedido.idPedido}"></td>
+	</tr>
+	</table>
+	
 
 <!-- JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
