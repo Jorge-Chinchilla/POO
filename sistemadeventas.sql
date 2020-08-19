@@ -21,6 +21,7 @@ create table pedido(idPedido int primary key,
                     fechaVenta Date,
                     idCliente int not null,
                     idDireccion int not null,
+                    estado boolean,
 					foreign key(idCliente) references cliente(idCliente),
                     foreign key(idDireccion) references direccion(idDireccion));
            
@@ -49,11 +50,7 @@ create table listaPedido(idPedido int,
 						 foreign key(idPedido) references pedido(idPedido),
                          foreign key(idProducto) references producto(idProducto),
                          primary key(idPedido, idProducto));
-                       
-create table despacho(idEstado int primary key,
-                      estado boolean,
-                      idPedido int,
-					  foreign key(idPedido) references pedido(idPedido));
+
 
 create table empleado(idEmpleado int primary key,
                       nombre varchar(64), 
@@ -94,6 +91,7 @@ create table orden(idOrden int primary key,
                    
 use sistemadeventas;
 
+select * from listapedido;
 select * from direccion;
 select * from pagoTarjeta;
 select* from pago;

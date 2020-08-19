@@ -1,7 +1,6 @@
 package edu.unah.poo.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,7 +108,7 @@ public class ControladorPedido {
 				List<Direccion> direcciones = tmpCliente.getDirecciones();
 
 				//Vamos a obtener una direccion default del cliente, mas adelante se le puede asignar una en especifico.
-				Pedido tmpPedido = new Pedido(p, LocalDate.now(), tmpCliente, direcciones.get(0));
+				Pedido tmpPedido = new Pedido(p, LocalDate.now(), false, tmpCliente, direcciones.get(0));
 				this.servicePedido.crearPedido(tmpPedido);
 
 				model.addAttribute("pedido", tmpPedido);

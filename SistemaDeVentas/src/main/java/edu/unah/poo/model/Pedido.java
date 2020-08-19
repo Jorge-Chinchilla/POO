@@ -14,6 +14,7 @@ public class Pedido {
 	@Id
 	private int idPedido;
 	private LocalDate fechaVenta;
+	private boolean estado;
 
 	@ManyToOne
 	@JoinColumn(name="idCliente")
@@ -30,12 +31,13 @@ public class Pedido {
     
 	public Pedido() {}
 
-	public Pedido(int idPedido, LocalDate fechaVenta, Cliente cliente, Direccion direccion) {
+	public Pedido(int idPedido, LocalDate fechaVenta, boolean estado, Cliente cliente, Direccion direccion) {
 		super();
 		this.idPedido = idPedido;
 		this.fechaVenta = fechaVenta;
 		this.cliente = cliente;
 		this.direccion = direccion;
+		this.estado = estado;
 	}
 
 	public int getIdPedido() {
@@ -76,6 +78,14 @@ public class Pedido {
 
 	public void setListaPedido(List<ListaPedido> listaPedido) {
 		this.listaPedido = listaPedido;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 	
 }
