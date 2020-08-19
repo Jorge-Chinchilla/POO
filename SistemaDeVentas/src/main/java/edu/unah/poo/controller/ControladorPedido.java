@@ -169,18 +169,16 @@ public class ControladorPedido {
 		
 		Cliente cliente = this.serviceCliente.buscarCliente(idCliente);
 		List<Producto> inventario = this.serviceProducto.obtenerProductos();
-		List<Producto> productos_de_Pedido = new ArrayList<Producto>();
+		
 
-		for (ListaPedido listaPedido1:pedido.getListaPedido()) {
-			productos_de_Pedido.add(listaPedido1.getProducto());
-		}		
+		List<ListaPedido> registro_de_pedido = pedido.getListaPedido();
 		
 		
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("inventario", inventario);
 		model.addAttribute("direcciones", cliente.getDirecciones());
-		model.addAttribute("agregados", productos_de_Pedido);
+		model.addAttribute("agregados", registro_de_pedido);
 		return "sistema_pedido_datos";
 	}
 	
