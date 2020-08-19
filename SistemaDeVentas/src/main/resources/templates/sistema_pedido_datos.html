@@ -65,7 +65,7 @@
 <div class=" text-center bg-light" align="center" style="height: 180px">
   <div class="col-md-5 p-lg-5 mx-auto my-5" align="center">
     <h1 class="display-4 font-weight-normal">Datos del pedido</h1>
-    <button type="submit" class="btn btn-outline-secondary">Guardar en el borrador</button>
+    <button th:href="@{/sistema/guardarEnBorrador}" type="submit" class="btn btn-outline-secondary">Pedido ya se encuentra en borrador</button>
     <button type="submit" class="btn btn-outline-success">Procesar</button>
     <p class="lead font-weight-normal"></p>
   </div>
@@ -119,18 +119,18 @@
 		</tr>
 	</thead>
 	<tr th:each="tmpDireccion:${direcciones}">
-					<form th:action="@{/sistema/cambiarDireccion}" method="post">
-						<input class="form-control mr-sm-2" type="hidden"
-									placeholder="" aria-label="Search" id="idDireccion" name="idDireccion" style="width: 80px" th:value="${tmpDireccion.idDireccion}">				
-					
-						<td th:text="${tmpDireccion.tipo}" style=" color: black"></td>
-						<td th:text="${tmpDireccion.direccion}" style=" color: black"></td>
-						<td>
-							<input type="hidden" id="idPedido" name="idPedido" th:value="${pedido.idPedido}" style="width: 80px">
-							<input type="hidden" id="idCliente" name="idCliente" th:value="${cliente.idCliente}" style="width: 80px">
-							<button class="btn btn-success" type="submit">Seleccionar</button>
-						</td>
-					</form>
+				<form th:action="@{/sistema/cambiarDireccion}" method="post">
+					<input class="form-control mr-sm-2" type="hidden"
+								placeholder="" aria-label="Search" id="idDireccion" name="idDireccion" style="width: 80px" th:value="${tmpDireccion.idDireccion}">				
+				
+					<td th:text="${tmpDireccion.tipo}" style=" color: black"></td>
+					<td th:text="${tmpDireccion.direccion}" style=" color: black"></td>
+					<td>
+						<input type="hidden" id="idPedido" name="idPedido" th:value="${pedido.idPedido}" style="width: 80px">
+						<input type="hidden" id="idCliente" name="idCliente" th:value="${cliente.idCliente}" style="width: 80px">
+						<button class="btn btn-success" type="submit">Seleccionar</button>
+					</td>
+				</form>
 	</tr>
 	</table>
     </div>
