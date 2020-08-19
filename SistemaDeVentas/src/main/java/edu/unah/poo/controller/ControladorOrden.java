@@ -1,9 +1,13 @@
 package edu.unah.poo.controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import edu.unah.poo.function.EmailSender;
 import edu.unah.poo.model.Cliente;
 import edu.unah.poo.model.Empleado;
 import edu.unah.poo.model.ListaPedido;
@@ -72,7 +77,11 @@ public class ControladorOrden {
 							 @RequestParam(name="idEmpleado") int idEmpleado) {
 		
 		Pedido pedido = this.servicePedido.buscarPedido(idPedido);
+		pedido.setEstado(true);
+		this.servicePedido.crearPedido(pedido);
 		Empleado empleado = this.serviceEmpleado.buscarEmpleado(idEmpleado);
+		
+		//No se pudo desarrollar la parte de pago por el tiempo justo de entrega
 		
 		//PagoEfectivo pagoEfectivo = new PagoEfectivo(0,0,0);
 		//this.servicePagoEfectivo.crearPagoEfectivo(pagoEfectivo);
@@ -82,11 +91,38 @@ public class ControladorOrden {
 		double valorDeOrden = this.servicePedido.obtenerValor(idPedido);
 		double valorDeEnvio = 55;
 		
+		
 		Pago pago = new Pago(1, valorDeOrden, valorDeOrden);
 		this.servicePago.crearPago(pago);
 		
 		Orden orden = new Orden(idOrden, LocalDate.now(), fechaEntrega, empleado, pago, pedido);
 		this.serviceOrden.crearOrden(orden);
+		
+		//actualizar cantidad de productos en el inventario al crear la orden
+		int cantFinal =0;
+		List<ListaPedido> productosEnPedido = pedido.getListaPedido();
+		for(ListaPedido productoPedido: productosEnPedido) {
+			Producto producto = this.serviceProducto.buscarProducto(productoPedido.getIdProducto());
+			cantFinal = producto.getCantidad()-productoPedido.getCantidad();
+			producto.setCantidad(cantFinal);
+			this.serviceProducto.crearProducto(producto);
+		}
+		
+		//Desarrollamos el email para el cliente
+		Cliente cliente = pedido.getCliente();
+		EmailSender emailSender = new EmailSender(cliente.getEmail(),
+                "Orden lista",
+                "Hola,\n Tu pedido con numero de orden "+orden.getIdOrden()+" ya fue procesado!\n\nEl total del pedido es: "+orden.getPago().getValorPedido() +"lps y "+orden.getPago().getValorEnvio()+"lps de envio. \n\n Gracias por preferirnos");
+        try {
+            emailSender.sendmail();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (AddressException e) {
+            e.printStackTrace();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+		
 		return "sistema_realizado_exitosamente";
 	}
 	

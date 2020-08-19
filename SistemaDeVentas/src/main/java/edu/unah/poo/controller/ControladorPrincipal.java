@@ -14,4 +14,9 @@ public class ControladorPrincipal {
 		return "pagina_principal";
 	}
 	
+	@GetMapping("/k")
+	public String volverPrincipal() {
+		return "pagina_principal";
+	}
+	
 }

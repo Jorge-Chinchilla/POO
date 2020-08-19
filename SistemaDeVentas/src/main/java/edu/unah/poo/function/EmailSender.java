@@ -9,8 +9,8 @@ import javax.mail.Message;
 
 public class EmailSender {
 
-    private String Sender = "8bit1.0k@gmail.com";
-    private String Password = "j10g769ls";
+    private String Sender = "jorgechinchillafk@gmail.com";
+    private String Password = "";
     private String Receiver;
     private String Subject;
     private String MessageToSend;

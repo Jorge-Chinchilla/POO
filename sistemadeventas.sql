@@ -91,31 +91,50 @@ create table orden(idOrden int primary key,
                    
 use sistemadeventas;
 
-select * from listapedido;
-select * from direccion;
-select * from pagoTarjeta;
-select* from pago;
+insert into empleado values (2,'josue',"98891839","Mi casa","josue","1234","ADMINISTRADOR",1);
+insert into empleado values (99,'josue',"98891839","Mi casa","josue","1234","EMPLEADO",1);
+insert into empleado values (99,'josue',"98891839","Mi casa","josue","1234","EMPLEADO",1);
+
 select * from cliente;
 select * from direccion;
-select * from pedido;
-select * from despacho;
 select * from empleado;
-select * from proveedor;
+select * from listapedido;
+select * from orden;
+select * from pago;
+select * from pagofectivo;
+select * from pagoTarjeta;
+select * from pedido;
 select * from producto;
+select * from proveedor;
 
-delete from despacho where idEstado = 500;
-delete from pedido where idPedido = 500;
-delete from direccion where idDireccion = 1001;
+ -- idCliente 0-999
+ -- idDireccion 1000-2999
+ -- idEmpleado 3000-3999
+ -- idProveedor 4000-4999
+ -- idProducto 5000-9999
+ -- idPedido 10000-49999
+ -- idOrden 50000-99999
+ 
+insert cliente values(100, "Mariela Maria Agustino Flores", "maria.in@gmail.com", "3798888", 2059.5);
+insert cliente values(95, "Josue Alejandro Ruiz Alvarado", "josue-ruiz@gmail.com", "9998888", 2600.5);
+insert cliente values(106, "Maria Daniela Salgado Urrutia", "dan.salgado98@gmail.com", "95846215", 2600);
+insert cliente values(109, "Ronald Alejandro Garcia Martinez", "idontknowit@gmail.com", "36146215", 2220);
 
-insert cliente values(100, "Jorge Chinchilla", "jorgech@gmail.com", "3798888", 2059.5);
-insert direccion values(200, "hogar","La guadalupe",100);
-insert proveedor values(300, "sula","22591215","pedidos@sula.hn","08016595294");
-insert producto values(400, "mantequilla", "1 libra", 30.5,"ayudenme",36,300);
-insert pedido values(500,"2019-07-07",100,200);
-insert listaPedido values(500,400,6,30.5);
-insert despacho values(500,true,500);
-insert empleado values(600, "juan","95846251","La Kennedy");
-insert pagoEfectivo values(700, 600,5.5);
-insert pagoTarjeta values(701,"9584-0251-0210-5999","2020-09-05","visa","298");
-                      
+insert direccion values(1060, "Fiscal","La cerro grande bloque 4 casa 1684",1);
+insert direccion values(1050, "Trabajo","Blvrd Morazan, Torre Amaya apt 18",1);
+insert direccion values(1250, "Hogar","Las espadas calle 9 casa 9512",1);
+insert direccion values(1321, "Fiscal","Lomas del toncontin casa 1495",106);
+insert direccion values(1256, "Trabajo","Barrio morazan casa 9584",109);
+
+insert empleado values(3500, "Jorge Chinchilla","95846251","La Kennedy","jorge","1234", "ADMINISTRADOR",1);
+insert empleado values(3200, "Jorge Chinchilla","95846251","La Kennedy","jorgeEmp","1234", "EMPLEADO",1);   
+
+insert proveedor values(4500, "Sula", "22659821", "pedidos@sula.hn", "08016594846");
+insert proveedor values(4501, "Yummies", "22684822", "yummies.pedido@yum.hn", "08011546825");
+insert proveedor values(4509, "Coca Cola", "22154109", "pedidos@cocacola.hn", "08014894848");
+insert proveedor values(4708, "Bimbo", "22638176", "bimbo.pedidos@bimbo.hn", "08011546284");
+
+insert producto values();
+
+                   
                       
