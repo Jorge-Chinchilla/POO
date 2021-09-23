@@ -30,7 +30,6 @@ public class ServiceCliente {
 		this.repositoryCliente.save(cliente);
 		Direccion tmpDireccion = new Direccion(idDireccion, tipo, direccion, 1, cliente);
 		this.repositoryDireccion.save(tmpDireccion);
-		
 	}
 	
 	public Cliente buscarCliente(int id) {

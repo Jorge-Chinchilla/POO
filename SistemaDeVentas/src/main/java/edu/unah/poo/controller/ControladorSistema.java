@@ -1,5 +1,6 @@
 package edu.unah.poo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,9 +52,16 @@ public class ControladorSistema {
 	public String detallesCliente(@PathVariable("id") int idCliente, Model model) {
 		Cliente cliente = this.serviceCliente.buscarCliente(idCliente);
 		List<Direccion> direcciones= cliente.getDirecciones();
+		List<Direccion> direccionesActivas = new ArrayList<Direccion>();
+		for(Direccion d: direcciones) {
+			if(d.getActivo()==1) {
+				direccionesActivas.add(d);
+			}
+		}
+		
 		List<Pedido> pedidos = cliente.getPedidos();
 		model.addAttribute("cliente", cliente);
-		model.addAttribute("direcciones", direcciones);
+		model.addAttribute("direcciones", direccionesActivas);
 		model.addAttribute("pedidos", pedidos);
 		return "sistema_cliente_detalles";
 	}

@@ -40,14 +40,20 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pedido</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Crear pedido</a>
-          <a class="dropdown-item" href="#">Ver pedidos de cliente</a>
-          <a class="dropdown-item" href="#">...</a>
+          <a class="dropdown-item" th:href="@{/sistema/registrarPedido}">Registrar Pedido</a>
+          <a class="dropdown-item" th:href="@{/sistema/listarPedidos}">Registro de Pedidos</a>
+        </div>
+      </li>
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Despacho</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" th:href="@{/sistema/ordenesProcesadas}">Ordenes procesadas</a>
+          <a class="dropdown-item" th:href="@{/sistema/borrador}">Borrador de pedidos</a>
         </div>
       </li>
     </ul> 
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-danger" type="submit">Salir</button>
+      <a class="btn btn-outline-danger" th:href="@{/logout}">Salir</a>
     </form>
   </div>
 </nav>

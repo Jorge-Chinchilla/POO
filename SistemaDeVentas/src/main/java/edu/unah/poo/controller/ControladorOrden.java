@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import edu.unah.poo.function.EmailSender;
 import edu.unah.poo.model.Cliente;
+import edu.unah.poo.model.Direccion;
 import edu.unah.poo.model.Empleado;
 import edu.unah.poo.model.ListaPedido;
 import edu.unah.poo.model.Orden;
@@ -153,11 +154,17 @@ public class ControladorOrden {
 		Cliente cliente = pedido.getCliente();
 		List<Producto> inventario = this.serviceProducto.obtenerProductos();
 		List<ListaPedido> registro_de_pedido = pedido.getListaPedido();
+		List<Direccion> direccionesActivas = new ArrayList<Direccion>();
+		for(Direccion d: cliente.getDirecciones()) {
+			if(d.getActivo()==1) {
+				direccionesActivas.add(d);
+			}
+		}
 	
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("inventario", inventario);
-		model.addAttribute("direcciones", cliente.getDirecciones());
+		model.addAttribute("direcciones", direccionesActivas);
 		model.addAttribute("agregados", registro_de_pedido);
 		return "sistema_pedido_datos";
 		

@@ -100,7 +100,7 @@ public class ControladorAdministracion {
 								@RequestParam(name="direccion") String direccion,
 								@RequestParam(name="usuario") String usuario,
 								@RequestParam(name="contrasenia") String contrasenia) {
-		Empleado empleado = new Empleado(idEmpleado, nombre, telefono, direccion, passwordEncoder.encode(usuario), contrasenia, "mecanico", 1);
+		Empleado empleado = new Empleado(idEmpleado, nombre, telefono, direccion, usuario, passwordEncoder.encode(contrasenia), "EMPLEADO", 1);
 		this.serviceEmpleado.crearEmpleado(empleado);
 		return "administracion_realizado_exitosamente";
 	}

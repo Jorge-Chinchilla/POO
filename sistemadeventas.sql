@@ -91,9 +91,6 @@ create table orden(idOrden int primary key,
                    
 use sistemadeventas;
 
-insert into empleado values (2,'josue',"98891839","Mi casa","josue","1234","ADMINISTRADOR",1);
-insert into empleado values (99,'josue',"98891839","Mi casa","josue","1234","EMPLEADO",1);
-insert into empleado values (99,'josue',"98891839","Mi casa","josue","1234","EMPLEADO",1);
 
 select * from cliente;
 select * from direccion;
@@ -115,26 +112,35 @@ select * from proveedor;
  -- idPedido 10000-49999
  -- idOrden 50000-99999
  
-insert cliente values(100, "Mariela Maria Agustino Flores", "maria.in@gmail.com", "3798888", 2059.5);
-insert cliente values(95, "Josue Alejandro Ruiz Alvarado", "josue-ruiz@gmail.com", "9998888", 2600.5);
-insert cliente values(106, "Maria Daniela Salgado Urrutia", "dan.salgado98@gmail.com", "95846215", 2600);
-insert cliente values(109, "Ronald Alejandro Garcia Martinez", "idontknowit@gmail.com", "36146215", 2220);
+ insert empleado values(3500, "Jorge Chinchilla","95846251","La Kennedy","jor","1234", "ADMINISTRADOR",1);
+ insert empleado values(3200, "Jorge Chinchilla","95846251","La Kennedy","jorge","1234", "EMPLEADO",1);
+ 
+insert cliente values(100, "Mariela Maria Agustino Flores", "maria.in@gmail.com", "3798888", 2059.5,1);
+insert cliente values(95, "Josue Alejandro Ruiz Alvarado", "josue-ruiz@gmail.com", "9998888", 2600.5,1);
+insert cliente values(106, "Maria Daniela Salgado Urrutia", "dan.salgado98@gmail.com", "95846215", 2600,1);
+insert cliente values(109, "Ronald Alejandro Garcia Martinez", "idontknowit@gmail.com", "36146215", 2220,1);
 
-insert direccion values(1060, "Fiscal","La cerro grande bloque 4 casa 1684",1);
-insert direccion values(1050, "Trabajo","Blvrd Morazan, Torre Amaya apt 18",1);
-insert direccion values(1250, "Hogar","Las espadas calle 9 casa 9512",1);
-insert direccion values(1321, "Fiscal","Lomas del toncontin casa 1495",106);
-insert direccion values(1256, "Trabajo","Barrio morazan casa 9584",109);
 
-insert empleado values(3500, "Jorge Chinchilla","95846251","La Kennedy","jorge","1234", "ADMINISTRADOR",1);
-insert empleado values(3200, "Jorge Chinchilla","95846251","La Kennedy","jorgeEmp","1234", "EMPLEADO",1);   
+-- insert direccion values(1060, "Fiscal", "La cerro grande bloque 4 casa 1684", 1, 1);
+-- insert direccion values(1050, "Trabajo","Blvrd Morazan, Torre Amaya apt 18",1,1);
+-- insert direccion values(1250, "Hogar","Las espadas calle 9 casa 9512",1,1);
+insert direccion values(1321, "Fiscal","Lomas del toncontin casa 1495",106,1);
+insert direccion values(1256, "Trabajo","Barrio morazan casa 9584",109,1);
 
-insert proveedor values(4500, "Sula", "22659821", "pedidos@sula.hn", "08016594846");
-insert proveedor values(4501, "Yummies", "22684822", "yummies.pedido@yum.hn", "08011546825");
-insert proveedor values(4509, "Coca Cola", "22154109", "pedidos@cocacola.hn", "08014894848");
-insert proveedor values(4708, "Bimbo", "22638176", "bimbo.pedidos@bimbo.hn", "08011546284");
 
-insert producto values();
+insert proveedor values(4500, "Sula", "22659821", "pedidos@sula.hn", "08016594846",1);
+insert proveedor values(4501, "Yummies", "22684822", "yummies.pedido@yum.hn", "08011546825",1);
+insert proveedor values(4509, "Coca Cola", "22154109", "pedidos@cocacola.hn", "08014894848",1);
+insert proveedor values(4708, "Bimbo", "22638176", "bimbo.pedidos@bimbo.hn", "08011546284",1);
 
-                   
+insert producto values(6000,"Leche","1 litro",21,"Leche de vaca",64,4500);
+insert producto values(4501,"Zambos","pequeños",5,"Zambos picantes",128,4501);
+insert producto values(4509,"Coca Cola","2 Litros",32,"Coca cola familiar",128,4509);
+insert producto values(4708,"Pinguinito","na",17,"Panecillas con relleno",64,4708);
+
+insert direccion values(1060, "Fiscal", "La cerro grande bloque 4 casa 1684", 1, 1);
+insert direccion values(1050, "Trabajo","Blvrd Morazan, Torre Amaya apt 18",1,1);
+insert direccion values(1250, "Hogar","Las espadas calle 9 casa 9512",1,1);
+
+         
                       

@@ -2,6 +2,7 @@ package edu.unah.poo.controller;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -90,12 +91,19 @@ public class ControladorPedido {
 				List<Producto> inventario = this.serviceProducto.obtenerProductos();
 				Pedido tmpPedido = this.servicePedido.buscarPedido(p);//hay que asignarle  la fecha
 				LocalDate fecha = LocalDate.now();
+				List<Direccion> direccionesActivas = new ArrayList<Direccion>();
+				for(Direccion d: tmpCliente.getDirecciones()) {
+					if(d.getActivo()==1) {
+						direccionesActivas.add(d);
+					}
+				}
+				
 
 				tmpPedido.setFechaVenta(fecha);
 				model.addAttribute("pedido", tmpPedido);
 				model.addAttribute("cliente", tmpCliente);
 				model.addAttribute("inventario", inventario);
-				model.addAttribute("direcciones", tmpCliente.getDirecciones());
+				model.addAttribute("direcciones", direccionesActivas);
 
 				List<ListaPedido> registro_de_pedido = tmpPedido.getListaPedido();
 
@@ -121,7 +129,14 @@ public class ControladorPedido {
 				List<Producto> inventario = this.serviceProducto.obtenerProductos();
 				Cliente tmpCliente = this.serviceCliente.buscarCliente(c);
 				List<Direccion> direcciones = tmpCliente.getDirecciones();
+				List<Direccion> direccionesActivas = new ArrayList<Direccion>();
+				for(Direccion d: direcciones) {
+					if(d.getActivo()==1) {
+						direccionesActivas.add(d);
+					}
+				}
 
+				
 				//Vamos a obtener una direccion default del cliente, mas adelante se le puede asignar una en especifico.
 				Pedido tmpPedido = new Pedido(p, LocalDate.now(), false, tmpCliente, direcciones.get(0));
 				this.servicePedido.crearPedido(tmpPedido);
@@ -129,7 +144,7 @@ public class ControladorPedido {
 				model.addAttribute("pedido", tmpPedido);
 				model.addAttribute("cliente", tmpCliente);
 				model.addAttribute("inventario", inventario);
-				model.addAttribute("direcciones", direcciones);
+				model.addAttribute("direcciones", direccionesActivas);
 				
 				return "sistema_pedido_datos"; // 
 			}
@@ -158,7 +173,7 @@ public class ControladorPedido {
 		model.addAttribute("cliente", cliente);
 		return "sistema_pedido_detalles";
 	}
-	
+	 
 	@RequestMapping(value ="/sistema/procesarPedido/{id}", method=RequestMethod.GET)
 	public String procesar(@PathVariable("id") int idPedido, Model model) {
 		Pedido pedido = this.servicePedido.buscarPedido(idPedido);
@@ -196,10 +211,17 @@ public class ControladorPedido {
 
 		List<ListaPedido> registro_de_pedido = pedido.getListaPedido();
 
+		List<Direccion> direccionesActivas = new ArrayList<Direccion>();
+		for(Direccion d: cliente.getDirecciones()) {
+			if(d.getActivo()==1) {
+				direccionesActivas.add(d);
+			}
+		}
+		
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("inventario", inventario1);
-		model.addAttribute("direcciones", cliente.getDirecciones());
+		model.addAttribute("direcciones", direccionesActivas);
 		model.addAttribute("agregados", registro_de_pedido);
 		
 		return "sistema_pedido_datos";
@@ -216,12 +238,19 @@ public class ControladorPedido {
 								   Model model) {
 		Pedido pedido = this.servicePedido.buscarPedido(idPedido);
 		Direccion direccion = this.serviceDireccion.buscarDireccion(idDireccion);
+		
+		
 		pedido.setDireccion(direccion);
 		this.servicePedido.crearPedido(pedido);
 		
 		Cliente cliente = this.serviceCliente.buscarCliente(idCliente);
 		List<Producto> inventario = this.serviceProducto.obtenerProductos();
-
+		List<Direccion> direccionesActivas = new ArrayList<Direccion>();
+		for(Direccion d: cliente.getDirecciones()) {
+			if(d.getActivo()==1) {
+				direccionesActivas.add(d);
+			}
+		}
 
 		List<ListaPedido> registro_de_pedido = pedido.getListaPedido();
 		
@@ -229,7 +258,7 @@ public class ControladorPedido {
 		model.addAttribute("pedido", pedido);
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("inventario", inventario);
-		model.addAttribute("direcciones", cliente.getDirecciones());
+		model.addAttribute("direcciones", direccionesActivas);
 		model.addAttribute("agregados", registro_de_pedido);
 		return "sistema_pedido_datos";
 	}
