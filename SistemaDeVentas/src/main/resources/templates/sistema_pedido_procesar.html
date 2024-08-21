@@ -2,14 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="ISO-8859-1" content="text/html; charset=UTF-8">
-<title>Registrar Cliente</title>
+<title>Procesar orden</title>
 
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
 <body>
- 
+
+
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <img th:src="@{/images/sdv1.png}" width="50" height="50">
     <a class="navbar-brand" href="#"></a>
@@ -47,87 +48,68 @@
             <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Despacho</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" th:href="@{/sistema/ordenesProcesadas}">Ordenes procesadas</a>
-          <a class="dropdown-item" th:href="@{/sistema/borrador}">Borrador de pedidos</a>
+          <a class="dropdown-item" href="#">Ordenes procesadas</a>
+          <a class="dropdown-item" href="#">Borrador de pedidos</a>
         </div>
       </li>
     </ul> 
     <form class="form-inline my-2 my-lg-0">
-      <a class="btn btn-outline-danger" th:href="@{/logout}">Salir</a>
+      <button class="btn btn-outline-danger" type="submit">Salir</button>
     </form>
   </div>
 </nav>
 
 <main role="main">
 
-	<div class="jumbotron">
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
     <div class="container">
     <h1 class="display-3"></h1>
-      <h1 class="display-3"> </h1>
-      <h1 class="display-3"> </h1>
-      <h1 class="display-3">Registrar nuevo cliente</h1>
-      <p>Al ingresar un cliente, este se guardara automaticamente en la base de datos.</p>
+    <h1 class="display-3"></h1>
+      <h1 class="display-3">Orden a Procesar</h1>
+      <p>Recuerda confirmar tu id de empleado para confirmar la orden.</p>
+      <p><a class="btn btn-primary btn-lg" href="#" role="button">Listar pedidos pendientes&raquo;</a></p>
     </div>
-  	</div>
-		
-		<hr>
+  </div>
+
+	<hr>
 		<div class="container">
 
 			<div class="card">
 				<h4 class="card-header">
-					<strong>Registro de cliente</strong>
+					<strong>Registro de orden</strong>
 				</h4>
 				<div class="card-body">
-					<form th:action="@{/cliente/crearCliente}" method="post">
+					<form th:action="@{/sistema/crearOrden}" method="post">
 						<div class="form-group">
-							<label for="exampleInputEmail1">IdCliente</label> <input
-								type="number" class="form-control" id="id" name="idCliente"
-								placeholder="ingrese un id para el cliente" min="0" max="999">
+							<label for="exampleInputEmail1">IdPedido</label> <input
+								type="number" class="form-control" id="idPedido" name="idPedido"
+								placeholder="" th:value="${pedido.idPedido}" readonly="true">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Nombre</label> <input type="text"
-								class="form-control" id="nombre" name="nombre"
-								placeholder="ingrese el nombre del cliente">
+							<label for="exampleInputEmail1">IdOrden</label> <input
+								type="number" class="form-control" id="idOrden" name="idOrden"
+								placeholder="Asigne un numero de id" min="50000" max="99999">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Email</label> <input
-								type="text" class="form-control" id="email" name="email"
-								placeholder="ingrese el correo del cliente">
+							<label for="exampleInputEmail1">Fecha de Entrega</label> <input type="String"
+								class="form-control" id="fechaEntrega" name="fechaEntrega"
+								placeholder="ingrese la fecha de entrega	">
 						</div>
 						<div class="form-group">
-							<label for="exampleInputEmail1">Telefono</label> <input
-								type="text" class="form-control" id="telefono" name="telefono"
-								placeholder="ingrese el telefono del cliente">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Credito</label> <input
-								type="number" class="form-control" id="credito" name="credito"
-								placeholder="ingrese un id para el cliente" min="1000" max="3500">
-						</div>						
-						<div class="form-group">
-						<h4>Ingrese una direccion para el cliente</h4>
-							<label for="exampleInputEmail1">IdDireccion</label> <input
-								type="number" class="form-control" id="idDireccion" name="idDireccion"
-								placeholder="ingrese un id para la direccion" min="1000" max="2999">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Tipo de direccion</label> <input
-								type="text" class="form-control" id="tipo" name="tipo"
-								placeholder="ingrese el tipo de direccion">
-						</div>
-						<div class="form-group">
-							<label for="exampleInputEmail1">Direccion</label> <input
-								type="text" class="form-control" id="direccion" name="direccion"
-								placeholder="ingrese la direccion del cliente">
-						</div>
-						<button type="submit" class="btn btn-primary">Registrar</button>
-				</div>
+							<label for="exampleInputEmail1">Confirmar ID de empleado responsable</label><input
+								type="number" class="form-control" id="idEmpleado" name="idEmpleado"
+								placeholder="confirme su id" min="3000" max="3999">
+						</div>					
+						<button type="submit" class="btn btn-primary">Procesar</button>
 					</form>
 				</div>
 			</div>
 		</div>
 
-	</main>
+</main>
+
+
 
 <!-- JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

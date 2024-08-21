@@ -62,9 +62,12 @@
 
 <main role="main">
 
-<div class=" text-center bg-light" align="center" style="height: 120px">
+<div class=" text-center bg-light" align="center" style="height: 180px">
   <div class="col-md-5 p-lg-5 mx-auto my-5" align="center">
     <h1 class="display-4 font-weight-normal">Datos del pedido</h1>
+    <a th:href="@{/sistema/realizado}" type="submit" class="btn btn-outline-secondary">Pedido ya se encuentra en borrador</a>
+    
+    <a th:href= "@{/sistema/procesarPedido/{id} (id=${pedido.idPedido}) }" type="submit" class="btn btn-outline-success">Procesar</a>
     <p class="lead font-weight-normal"></p>
   </div>
   <div class="product-device shadow-sm d-none d-md-block"></div>
@@ -107,6 +110,7 @@
     <div class="my-3 p-3">
       <h2 class="display-5">Direcciones del cliente</h2>
       <p class="lead">Elija una direccion del cliente para el pedido.</p>
+      
       <table  class="table table-hover" >
 	<thead class="thead-dark">
 		<tr>
@@ -116,11 +120,18 @@
 		</tr>
 	</thead>
 	<tr th:each="tmpDireccion:${direcciones}">
-	<td th:text="${tmpDireccion.tipo}"></td>
-	<td th:text="${tmpDireccion.direccion}"></td>
-	<td>
-		<a href= "#" class="btn btn-outline-success my-2 my-sm-0" type="submit">Seleccionar</a>
-	</td>
+				<form th:action="@{/sistema/cambiarDireccion}" method="post">
+					<input class="form-control mr-sm-2" type="hidden"
+								placeholder="" aria-label="Search" id="idDireccion" name="idDireccion" style="width: 80px" th:value="${tmpDireccion.idDireccion}">				
+				
+					<td th:text="${tmpDireccion.tipo}" style=" color: black"></td>
+					<td th:text="${tmpDireccion.direccion}" style=" color: black"></td>
+					<td>
+						<input type="hidden" id="idPedido" name="idPedido" th:value="${pedido.idPedido}" style="width: 80px">
+						<input type="hidden" id="idCliente" name="idCliente" th:value="${cliente.idCliente}" style="width: 80px">
+						<button class="btn btn-success" type="submit">Seleccionar</button>
+					</td>
+				</form>
 	</tr>
 	</table>
     </div>
@@ -132,7 +143,7 @@
   <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" style="width: 1000px">
     <div class="my-3 p-3">
     
-      <h2 class="display-5">Identificaion del pedido</h2>
+      <h2 class="display-5">Identificacion del pedido</h2>
     <table  class="table table-hover" >
 	<thead class="thead-dark">
 		<tr>
@@ -141,8 +152,8 @@
 		</tr>
 	</thead>
 	<tr>
-	<td th:text="${cliente.idCliente}"></td>
-	<td th:text="${pedido.idPedido}"></td>
+		<td th:text="${cliente.idCliente}"></td>
+		<td th:text="${pedido.idPedido}"></td>
 	</tr>
 	</table>
 	
@@ -150,13 +161,13 @@
 	<table  class="table table-hover" >
 	<thead class="thead-dark">
 		<tr>
-			<th>Id del cliente</th>
-			<th>Id del pedido</th>
+			<th>Tipo</th>
+			<th>Direccion del cliente</th>
 		</tr>
 	</thead>
 	<tr>
-	<td th:text="${cliente.idCliente}"></td>
-	<td th:text="${pedido.idPedido}"></td>
+	<td th:text="${pedido.direccion.tipo}"></td>
+	<td th:text="${pedido.direccion.direccion}"></td>
 	</tr>
 	</table>
 	
@@ -168,17 +179,14 @@
 			<th>Unidad</th>
 			<th>precio</th>
 			<th>cantidad en el pedido<th>
-			<th></th>
 		</tr>
 	</thead>
-	<tr th:each="producto:${agregados}">
-	<td th:text="${producto.nombre}"></td>
-	<td th:text="${producto.unidad}"></td>
-	<td th:text="${producto.precio}"></td>
-	<td th:text="${producto.cantidad}"></td>
-	<td>
-		<a href= "#" class="btn btn-outline-danger" type="submit">Remover</a>
-	</td>
+	<tr th:each="registro:${agregados}">
+	<td th:text="${registro.getProducto().getNombre()}"></td>
+	<td th:text="${registro.getProducto().getUnidad()}"></td>
+	<td th:text="${registro.getProducto().getPrecio()}"></td>
+	<td th:text="${registro.cantidad}"></td>
+
 	</tr>
 	</table>
       
@@ -189,40 +197,41 @@
     <div class="my-3 py-3">
       <h2 class="display-5">Productos disponibles</h2>
 
-	<form th:action="@{/sistema/agregarProducto}" method="post">
-    <table  class="table table-hover" >
-	<thead class="thead-dark">
-		<tr>
-			<th style="width: 90px">Id</th>
-			<th>Nombre del producto</th>
-			<th>Unidad</th>
-			<th>Precio</th>
-			<th style="width: 90px">cantidad</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tr th:each="p:${inventario}">
-	<td style=" color: white">
-			<input class="form-control mr-sm-2" type="number"
-				placeholder="" aria-label="Search" id="idProducto" th:value="${p.idProducto}" name="idProducto" readonly="true" style="width: 80px">
-	</td>
-	<td th:text="${p.nombre}" style=" color: white"></td>
-	<td th:text="${p.unidad}" style=" color: white"></td>
-	<td th:text="${p.precio}" style=" color: white"></td>
-	<td>
-	
-	<input class="form-control mr-sm-2" type="number"
-				placeholder="" aria-label="Search" id="cantidad" name="cantidad" min="1" th:max="${p.cantidad}" style="width: 80px">
-	
-	</td>
-	<td> 
-		<input type="hidden" id="idPedido" name="idPedido" th:value="${pedido.idPedido}" style="width: 80px">
-		<input type="hidden" id="idCliente" name="idCliente" th:value="${cliente.idCliente}" style="width: 80px">
-		<button class="btn btn-success" type="submit">Agregar</button>
-	</td>
-	</tr>
-	</table>		
-	</form>
+			<table  class="table table-hover" >
+				<thead class="thead-dark">
+					<tr>
+						<th style="width: 90px">Id</th>
+						<th>Nombre del producto</th>
+						<th>Unidad</th>
+						<th>Precio</th>
+						<th style="width: 90px">cantidad</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tr th:each="p:${inventario}">
+					<form th:action="@{/sistema/agregarProducto}" method="post">
+						<td style=" color: #ffffff">
+								<input class="form-control mr-sm-2" type="number"
+									placeholder="" aria-label="Search" id="idProducto" th:value="${p.idProducto}" name="idProducto" readonly="true" style="width: 80px">
+						</td>
+						<td th:text="${p.nombre}" style=" color: white"></td>
+						<td th:text="${p.unidad}" style=" color: white"></td>
+						<td th:text="${p.precio}" style=" color: white"></td>
+						<td>
+
+						<input class="form-control mr-sm-2" type="number"
+									placeholder="" aria-label="Search" id="cantidad" name="cantidad" min="1" th:max="${p.cantidad}" style="width: 80px">
+
+						</td>
+						<td>
+							<input type="hidden" id="idPedido" name="idPedido" th:value="${pedido.idPedido}" style="width: 80px">
+							<input type="hidden" id="idCliente" name="idCliente" th:value="${cliente.idCliente}" style="width: 80px">
+							<button class="btn btn-success" type="submit">Agregar</button>
+						</td>
+					</form>
+				</tr>
+			</table>
+
 
     </div>
   </div>

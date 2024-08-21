@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" >
 <head>
 <meta charset="ISO-8859-1" content="text/html; charset=UTF-8">
-<title>Registrar Cliente</title>
+<title>Registrar Proveedor</title>
 
 <!-- CSS only -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -46,7 +46,7 @@
       </li>
     </ul> 
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-danger" type="submit">Salir</button>
+      <a class="btn btn-outline-danger" th:href="@{/logout}">Salir</a>
     </form>
   </div>
 </nav>

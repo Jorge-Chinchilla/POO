@@ -1,12 +1,9 @@
 package edu.unah.poo.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -17,25 +14,30 @@ public class Pedido {
 	@Id
 	private int idPedido;
 	private LocalDate fechaVenta;
+	private boolean estado;
 
 	@ManyToOne
 	@JoinColumn(name="idCliente")
 	@JsonBackReference
 	private Cliente cliente;
-	
+
 	@ManyToOne
 	@JoinColumn(name="idDireccion")
 	@JsonBackReference
 	private Direccion direccion;
+
+	@OneToMany(mappedBy = "pedido",fetch = FetchType.LAZY)
+	private List<ListaPedido> listaPedido;
     
 	public Pedido() {}
 
-	public Pedido(int idPedido, LocalDate fechaVenta, Cliente cliente, Direccion direccion) {
+	public Pedido(int idPedido, LocalDate fechaVenta, boolean estado, Cliente cliente, Direccion direccion) {
 		super();
 		this.idPedido = idPedido;
 		this.fechaVenta = fechaVenta;
 		this.cliente = cliente;
 		this.direccion = direccion;
+		this.estado = estado;
 	}
 
 	public int getIdPedido() {
@@ -68,6 +70,22 @@ public class Pedido {
 
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}
+
+	public List<ListaPedido> getListaPedido() {
+		return listaPedido;
+	}
+
+	public void setListaPedido(List<ListaPedido> listaPedido) {
+		this.listaPedido = listaPedido;
+	}
+
+	public boolean getEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 	
 }

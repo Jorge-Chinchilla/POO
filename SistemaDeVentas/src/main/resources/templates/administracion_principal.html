@@ -47,7 +47,7 @@
       </li>
     </ul> 
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-danger" type="submit">Salir</button>
+      <a class="btn btn-outline-danger" th:href="@{/logout}">Salir</a>
     </form>
   </div>
 </nav>
@@ -81,31 +81,9 @@
       </div>
       
       <div class="col-md-4">
-        <h2>pensar</h2>
-		<p>Recuerda que para ver todas las direcciones o pedidos de un cliente solo debes ir al listado de clientes y seleccionar detalles del cliente, automaticamente se desplegaran todas las direcciones y pedidos de nuestro cliente.</p>
-        <p><a class="btn btn-secondary" th:href="@{/sistema/listarClientes}" role="button">Listado de clientes &raquo;</a></p>
-      </div>
-      
-      <div class="col-md-4">
-            <h2>pensar</h2>
-        	<form class="form-inline my-2 my-lg-0" th:action="@{/}">
-				<input class="form-control mr-sm-2" type="number"
-					placeholder="Search" aria-label="Search" id="idDireccion" name="idDireccion">
-				<button class="btn btn-outline-danger" type="submit">Eliminar</button>
-			</form>
-		<p>Ingrese el Id de la direccion que desea eliminar. Al presionar eliminar el sistema desplegara los detalles del cliente a eliminar. </p>
-        <p><a class="btn btn-secondary" th:href="@{/sistema/listarClientes}" role="button">Listado de direcciones &raquo;</a></p>
-      </div>
-      
-      <div class="col-md-4">
-        <h2>pensar</h2>
-        	<form class="form-inline my-2 my-lg-0" th:action="@{/}">
-				<input class="form-control mr-sm-2" type="number"
-					placeholder="Search" aria-label="Search" id="idCliente" name="idCliente">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Eliminar</button>
-			</form>
-		<p>Ingrese el id del cliente y este sera eliminado permanentemente de la base de datos. Al presionar eliminar el sistema desplegara los detalles del cliente a eliminar.</p>
-        <p><a class="btn btn-secondary" th:href="@{/}" role="button">Listado de clientes &raquo;</a></p>
+        <h2>Listar proveedores</h2>
+		<p>Listado de todos los proveedores en la base de datos</p>
+        <p><a class="btn btn-secondary" th:href="@{/administracion/listarProveedores}" role="button">Listado de proveedores &raquo;</a></p>
       </div>
 
     <hr>

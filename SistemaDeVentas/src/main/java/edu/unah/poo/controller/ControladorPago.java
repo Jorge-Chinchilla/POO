@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/Pago")
 public class ControladorPago {
 
+	//Controlador de pruebas -- en realidad no es utilizado
+	
     @Autowired
     ServicePago servicePago;
 

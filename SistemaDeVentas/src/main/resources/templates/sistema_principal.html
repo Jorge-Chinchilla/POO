@@ -42,19 +42,19 @@
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pedido</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
           <a class="dropdown-item" th:href="@{/sistema/registrarPedido}">Registrar Pedido</a>
-          <a class="dropdown-item" href="#">Registro de Pedidos</a>
+          <a class="dropdown-item" th:href="@{/sistema/listarPedidos}">Registro de Pedidos</a>
         </div>
       </li>
             <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Despacho</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Ordenes procesadas</a>
-          <a class="dropdown-item" href="#">Borrador de pedidos</a>
+          <a class="dropdown-item" th:href="@{/sistema/ordenesProcesadas}">Ordenes procesadas</a>
+          <a class="dropdown-item" th:href="@{/sistema/borrador}">Borrador de pedidos</a>
         </div>
       </li>
     </ul> 
     <form class="form-inline my-2 my-lg-0">
-      <button class="btn btn-outline-danger" type="submit">Salir</button>
+      <a class="btn btn-outline-danger" th:href="@{/logout}">Salir</a>
     </form>
   </div>
 </nav>
@@ -115,16 +115,6 @@
         <p><a class="btn btn-secondary" th:href="@{/sistema/listarClientes}" role="button">Listado de direcciones &raquo;</a></p>
       </div>
       
-      <div class="col-md-4">
-        <h2>Eliminar Cliente</h2>
-        	<form class="form-inline my-2 my-lg-0" th:action="@{/sistema/clienteEliminar}">
-				<input class="form-control mr-sm-2" type="number"
-					placeholder="Search" aria-label="Search" id="idCliente" name="idCliente">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Eliminar</button>
-			</form>
-		<p>Ingrese el id del cliente y este sera eliminado permanentemente de la base de datos. Al presionar eliminar el sistema desplegara los detalles del cliente a eliminar.</p>
-        <p><a class="btn btn-secondary" th:href="@{/sistema/listarClientes}" role="button">Listado de clientes &raquo;</a></p>
-      </div>
 
     <hr>
 
